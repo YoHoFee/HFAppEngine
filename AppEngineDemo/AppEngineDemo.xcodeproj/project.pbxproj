@@ -8,36 +8,54 @@
 
 /* Begin PBXBuildFile section */
 		98A62C1C566E84237887FDAF /* Pods_AppEngineDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2DF18235EB4DD86B5056B9 /* Pods_AppEngineDemo.framework */; };
-		F5239D5E1EF76D850059E082 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239D5D1EF76D850059E082 /* AppDelegate+Extension.swift */; };
+		F5239E1D1EF7C03B0059E082 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E051EF7C03B0059E082 /* API.swift */; };
+		F5239E1E1EF7C03B0059E082 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E061EF7C03B0059E082 /* AppConfiguration.swift */; };
+		F5239E1F1EF7C03B0059E082 /* HFBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E081EF7C03B0059E082 /* HFBaseViewModel.swift */; };
+		F5239E201EF7C03B0059E082 /* HFDataCent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E091EF7C03B0059E082 /* HFDataCent.swift */; };
+		F5239E211EF7C03B0059E082 /* HFUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E0A1EF7C03B0059E082 /* HFUserData.swift */; };
+		F5239E221EF7C03B0059E082 /* AppDelegate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E0C1EF7C03B0059E082 /* AppDelegate+Extension.swift */; };
+		F5239E231EF7C03B0059E082 /* HFAppEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E0D1EF7C03B0059E082 /* HFAppEngine.swift */; };
+		F5239E241EF7C03B0059E082 /* HFMainDataCent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E0E1EF7C03B0059E082 /* HFMainDataCent.swift */; };
+		F5239E251EF7C03B0059E082 /* HFNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E101EF7C03B0059E082 /* HFNetworkManager.swift */; };
+		F5239E261EF7C03B0059E082 /* HFAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E121EF7C03B0059E082 /* HFAlertController.swift */; };
+		F5239E271EF7C03B0059E082 /* HFWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E131EF7C03B0059E082 /* HFWebViewController.swift */; };
+		F5239E281EF7C03B0059E082 /* NSDate+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = F5239E151EF7C03B0059E082 /* NSDate+Format.m */; };
+		F5239E291EF7C03B0059E082 /* HFLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E171EF7C03B0059E082 /* HFLoginViewController.swift */; };
+		F5239E2A1EF7C03B0059E082 /* HFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5239E181EF7C03B0059E082 /* HFLoginViewController.xib */; };
+		F5239E2B1EF7C03B0059E082 /* HFStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E191EF7C03B0059E082 /* HFStartViewController.swift */; };
+		F5239E2C1EF7C03B0059E082 /* HFStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5239E1A1EF7C03B0059E082 /* HFStartViewController.xib */; };
+		F5239E2D1EF7C03B0059E082 /* HFWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5239E1B1EF7C03B0059E082 /* HFWelcomeViewController.swift */; };
+		F5239E2E1EF7C03B0059E082 /* HFWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5239E1C1EF7C03B0059E082 /* HFWelcomeViewController.xib */; };
 		F54DE8041EF1128D0089DDA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8031EF1128D0089DDA1 /* AppDelegate.swift */; };
 		F54DE8061EF1128D0089DDA1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8051EF1128D0089DDA1 /* ViewController.swift */; };
 		F54DE8091EF1128D0089DDA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54DE8071EF1128D0089DDA1 /* Main.storyboard */; };
 		F54DE80B1EF1128D0089DDA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F54DE80A1EF1128D0089DDA1 /* Assets.xcassets */; };
 		F54DE80E1EF1128D0089DDA1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54DE80C1EF1128D0089DDA1 /* LaunchScreen.storyboard */; };
-		F54DE8461EF118380089DDA1 /* HFDataCent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8341EF118380089DDA1 /* HFDataCent.swift */; };
-		F54DE8471EF118380089DDA1 /* HFAppEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8351EF118380089DDA1 /* HFAppEngine.swift */; };
-		F54DE8481EF118380089DDA1 /* HFNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8371EF118380089DDA1 /* HFNetworkManager.swift */; };
-		F54DE84B1EF118390089DDA1 /* HFAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE83F1EF118380089DDA1 /* HFAlertController.swift */; };
-		F54DE84C1EF118390089DDA1 /* HFWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8401EF118380089DDA1 /* HFWebViewController.swift */; };
-		F54DE84D1EF118390089DDA1 /* NSDate+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8421EF118380089DDA1 /* NSDate+Format.m */; };
-		F54DE84E1EF118390089DDA1 /* HFStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8441EF118380089DDA1 /* HFStartViewController.swift */; };
-		F54DE84F1EF118390089DDA1 /* HFStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F54DE8451EF118380089DDA1 /* HFStartViewController.xib */; };
-		F54DE8521EF118880089DDA1 /* HFLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8501EF118880089DDA1 /* HFLoginViewController.swift */; };
-		F54DE8531EF118880089DDA1 /* HFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F54DE8511EF118880089DDA1 /* HFLoginViewController.xib */; };
-		F54DE8561EF118FC0089DDA1 /* HFWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8541EF118FC0089DDA1 /* HFWelcomeViewController.swift */; };
-		F54DE8571EF118FC0089DDA1 /* HFWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F54DE8551EF118FC0089DDA1 /* HFWelcomeViewController.xib */; };
-		F54DE85B1EF11AF20089DDA1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8591EF11AF20089DDA1 /* API.swift */; };
-		F54DE85C1EF11AF20089DDA1 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE85A1EF11AF20089DDA1 /* AppConfiguration.swift */; };
-		F54DE85F1EF121D10089DDA1 /* HFBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE85D1EF121D10089DDA1 /* HFBaseViewModel.swift */; };
-		F54DE8601EF121D10089DDA1 /* HFUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE85E1EF121D10089DDA1 /* HFUserData.swift */; };
-		F54DE8621EF13E870089DDA1 /* HFMainDataCent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54DE8611EF13E870089DDA1 /* HFMainDataCent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7D2DF18235EB4DD86B5056B9 /* Pods_AppEngineDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppEngineDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B91D22C6E81FD9FBE5BDB944 /* Pods-AppEngineDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppEngineDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppEngineDemo/Pods-AppEngineDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		BB2CD2CD074B959FC116D54F /* Pods-AppEngineDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppEngineDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppEngineDemo/Pods-AppEngineDemo.release.xcconfig"; sourceTree = "<group>"; };
-		F5239D5D1EF76D850059E082 /* AppDelegate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Extension.swift"; sourceTree = "<group>"; };
+		F5239E051EF7C03B0059E082 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		F5239E061EF7C03B0059E082 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		F5239E081EF7C03B0059E082 /* HFBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFBaseViewModel.swift; sourceTree = "<group>"; };
+		F5239E091EF7C03B0059E082 /* HFDataCent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFDataCent.swift; sourceTree = "<group>"; };
+		F5239E0A1EF7C03B0059E082 /* HFUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFUserData.swift; sourceTree = "<group>"; };
+		F5239E0C1EF7C03B0059E082 /* AppDelegate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Extension.swift"; sourceTree = "<group>"; };
+		F5239E0D1EF7C03B0059E082 /* HFAppEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAppEngine.swift; sourceTree = "<group>"; };
+		F5239E0E1EF7C03B0059E082 /* HFMainDataCent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFMainDataCent.swift; sourceTree = "<group>"; };
+		F5239E101EF7C03B0059E082 /* HFNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFNetworkManager.swift; sourceTree = "<group>"; };
+		F5239E121EF7C03B0059E082 /* HFAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAlertController.swift; sourceTree = "<group>"; };
+		F5239E131EF7C03B0059E082 /* HFWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWebViewController.swift; sourceTree = "<group>"; };
+		F5239E141EF7C03B0059E082 /* NSDate+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Format.h"; sourceTree = "<group>"; };
+		F5239E151EF7C03B0059E082 /* NSDate+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Format.m"; sourceTree = "<group>"; };
+		F5239E171EF7C03B0059E082 /* HFLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFLoginViewController.swift; sourceTree = "<group>"; };
+		F5239E181EF7C03B0059E082 /* HFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFLoginViewController.xib; sourceTree = "<group>"; };
+		F5239E191EF7C03B0059E082 /* HFStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFStartViewController.swift; sourceTree = "<group>"; };
+		F5239E1A1EF7C03B0059E082 /* HFStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFStartViewController.xib; sourceTree = "<group>"; };
+		F5239E1B1EF7C03B0059E082 /* HFWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWelcomeViewController.swift; sourceTree = "<group>"; };
+		F5239E1C1EF7C03B0059E082 /* HFWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFWelcomeViewController.xib; sourceTree = "<group>"; };
 		F54DE8001EF1128D0089DDA1 /* AppEngineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppEngineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F54DE8031EF1128D0089DDA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F54DE8051EF1128D0089DDA1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,24 +63,6 @@
 		F54DE80A1EF1128D0089DDA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F54DE80D1EF1128D0089DDA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F54DE80F1EF1128D0089DDA1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F54DE8341EF118380089DDA1 /* HFDataCent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFDataCent.swift; sourceTree = "<group>"; };
-		F54DE8351EF118380089DDA1 /* HFAppEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAppEngine.swift; sourceTree = "<group>"; };
-		F54DE8371EF118380089DDA1 /* HFNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFNetworkManager.swift; sourceTree = "<group>"; };
-		F54DE83F1EF118380089DDA1 /* HFAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAlertController.swift; sourceTree = "<group>"; };
-		F54DE8401EF118380089DDA1 /* HFWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWebViewController.swift; sourceTree = "<group>"; };
-		F54DE8411EF118380089DDA1 /* NSDate+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Format.h"; sourceTree = "<group>"; };
-		F54DE8421EF118380089DDA1 /* NSDate+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Format.m"; sourceTree = "<group>"; };
-		F54DE8441EF118380089DDA1 /* HFStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFStartViewController.swift; sourceTree = "<group>"; };
-		F54DE8451EF118380089DDA1 /* HFStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFStartViewController.xib; sourceTree = "<group>"; };
-		F54DE8501EF118880089DDA1 /* HFLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFLoginViewController.swift; sourceTree = "<group>"; };
-		F54DE8511EF118880089DDA1 /* HFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFLoginViewController.xib; sourceTree = "<group>"; };
-		F54DE8541EF118FC0089DDA1 /* HFWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWelcomeViewController.swift; sourceTree = "<group>"; };
-		F54DE8551EF118FC0089DDA1 /* HFWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFWelcomeViewController.xib; sourceTree = "<group>"; };
-		F54DE8591EF11AF20089DDA1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		F54DE85A1EF11AF20089DDA1 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
-		F54DE85D1EF121D10089DDA1 /* HFBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFBaseViewModel.swift; sourceTree = "<group>"; };
-		F54DE85E1EF121D10089DDA1 /* HFUserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFUserData.swift; sourceTree = "<group>"; };
-		F54DE8611EF13E870089DDA1 /* HFMainDataCent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HFMainDataCent.swift; path = "AppEngineDemo/Core(核心模块)/HFMainDataCent.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,12 +85,78 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F5239D5C1EF76D000059E082 /* Extension */ = {
+		F5239E031EF7C03B0059E082 /* AppEngine */ = {
 			isa = PBXGroup;
 			children = (
-				F5239D5D1EF76D850059E082 /* AppDelegate+Extension.swift */,
+				F5239E041EF7C03B0059E082 /* Configuration */,
+				F5239E071EF7C03B0059E082 /* DataCent */,
+				F5239E0B1EF7C03B0059E082 /* Extension */,
+				F5239E0D1EF7C03B0059E082 /* HFAppEngine.swift */,
+				F5239E0E1EF7C03B0059E082 /* HFMainDataCent.swift */,
+				F5239E0F1EF7C03B0059E082 /* NetManager */,
+				F5239E111EF7C03B0059E082 /* Tool */,
+				F5239E161EF7C03B0059E082 /* ViewController */,
+			);
+			path = AppEngine;
+			sourceTree = "<group>";
+		};
+		F5239E041EF7C03B0059E082 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E051EF7C03B0059E082 /* API.swift */,
+				F5239E061EF7C03B0059E082 /* AppConfiguration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		F5239E071EF7C03B0059E082 /* DataCent */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E081EF7C03B0059E082 /* HFBaseViewModel.swift */,
+				F5239E091EF7C03B0059E082 /* HFDataCent.swift */,
+				F5239E0A1EF7C03B0059E082 /* HFUserData.swift */,
+			);
+			path = DataCent;
+			sourceTree = "<group>";
+		};
+		F5239E0B1EF7C03B0059E082 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E0C1EF7C03B0059E082 /* AppDelegate+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F5239E0F1EF7C03B0059E082 /* NetManager */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E101EF7C03B0059E082 /* HFNetworkManager.swift */,
+			);
+			path = NetManager;
+			sourceTree = "<group>";
+		};
+		F5239E111EF7C03B0059E082 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E121EF7C03B0059E082 /* HFAlertController.swift */,
+				F5239E131EF7C03B0059E082 /* HFWebViewController.swift */,
+				F5239E141EF7C03B0059E082 /* NSDate+Format.h */,
+				F5239E151EF7C03B0059E082 /* NSDate+Format.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		F5239E161EF7C03B0059E082 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F5239E171EF7C03B0059E082 /* HFLoginViewController.swift */,
+				F5239E181EF7C03B0059E082 /* HFLoginViewController.xib */,
+				F5239E191EF7C03B0059E082 /* HFStartViewController.swift */,
+				F5239E1A1EF7C03B0059E082 /* HFStartViewController.xib */,
+				F5239E1B1EF7C03B0059E082 /* HFWelcomeViewController.swift */,
+				F5239E1C1EF7C03B0059E082 /* HFWelcomeViewController.xib */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		F54DE7F71EF1128D0089DDA1 = {
@@ -114,7 +180,7 @@
 		F54DE8021EF1128D0089DDA1 /* AppEngineDemo */ = {
 			isa = PBXGroup;
 			children = (
-				F54DE8321EF118380089DDA1 /* Core(核心模块) */,
+				F5239E031EF7C03B0059E082 /* AppEngine */,
 				F54DE8031EF1128D0089DDA1 /* AppDelegate.swift */,
 				F54DE8051EF1128D0089DDA1 /* ViewController.swift */,
 				F54DE8071EF1128D0089DDA1 /* Main.storyboard */,
@@ -123,72 +189,6 @@
 				F54DE80F1EF1128D0089DDA1 /* Info.plist */,
 			);
 			path = AppEngineDemo;
-			sourceTree = "<group>";
-		};
-		F54DE8321EF118380089DDA1 /* Core(核心模块) */ = {
-			isa = PBXGroup;
-			children = (
-				F5239D5C1EF76D000059E082 /* Extension */,
-				F54DE8581EF11AF20089DDA1 /* Configuration */,
-				F54DE8331EF118380089DDA1 /* DataCent */,
-				F54DE8351EF118380089DDA1 /* HFAppEngine.swift */,
-				F54DE8611EF13E870089DDA1 /* HFMainDataCent.swift */,
-				F54DE8361EF118380089DDA1 /* NetManager */,
-				F54DE8381EF118380089DDA1 /* Tool */,
-				F54DE8431EF118380089DDA1 /* ViewController */,
-			);
-			path = "Core(核心模块)";
-			sourceTree = "<group>";
-		};
-		F54DE8331EF118380089DDA1 /* DataCent */ = {
-			isa = PBXGroup;
-			children = (
-				F54DE85D1EF121D10089DDA1 /* HFBaseViewModel.swift */,
-				F54DE85E1EF121D10089DDA1 /* HFUserData.swift */,
-				F54DE8341EF118380089DDA1 /* HFDataCent.swift */,
-			);
-			path = DataCent;
-			sourceTree = "<group>";
-		};
-		F54DE8361EF118380089DDA1 /* NetManager */ = {
-			isa = PBXGroup;
-			children = (
-				F54DE8371EF118380089DDA1 /* HFNetworkManager.swift */,
-			);
-			path = NetManager;
-			sourceTree = "<group>";
-		};
-		F54DE8381EF118380089DDA1 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-				F54DE83F1EF118380089DDA1 /* HFAlertController.swift */,
-				F54DE8401EF118380089DDA1 /* HFWebViewController.swift */,
-				F54DE8411EF118380089DDA1 /* NSDate+Format.h */,
-				F54DE8421EF118380089DDA1 /* NSDate+Format.m */,
-			);
-			path = Tool;
-			sourceTree = "<group>";
-		};
-		F54DE8431EF118380089DDA1 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F54DE8541EF118FC0089DDA1 /* HFWelcomeViewController.swift */,
-				F54DE8551EF118FC0089DDA1 /* HFWelcomeViewController.xib */,
-				F54DE8441EF118380089DDA1 /* HFStartViewController.swift */,
-				F54DE8451EF118380089DDA1 /* HFStartViewController.xib */,
-				F54DE8501EF118880089DDA1 /* HFLoginViewController.swift */,
-				F54DE8511EF118880089DDA1 /* HFLoginViewController.xib */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		F54DE8581EF11AF20089DDA1 /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				F54DE8591EF11AF20089DDA1 /* API.swift */,
-				F54DE85A1EF11AF20089DDA1 /* AppConfiguration.swift */,
-			);
-			path = Configuration;
 			sourceTree = "<group>";
 		};
 		F7424E935FDA7A80EF88DF1A /* Pods */ = {
@@ -263,10 +263,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5239E2A1EF7C03B0059E082 /* HFLoginViewController.xib in Resources */,
+				F5239E2C1EF7C03B0059E082 /* HFStartViewController.xib in Resources */,
 				F54DE80E1EF1128D0089DDA1 /* LaunchScreen.storyboard in Resources */,
-				F54DE8531EF118880089DDA1 /* HFLoginViewController.xib in Resources */,
-				F54DE84F1EF118390089DDA1 /* HFStartViewController.xib in Resources */,
-				F54DE8571EF118FC0089DDA1 /* HFWelcomeViewController.xib in Resources */,
+				F5239E2E1EF7C03B0059E082 /* HFWelcomeViewController.xib in Resources */,
 				F54DE80B1EF1128D0089DDA1 /* Assets.xcassets in Resources */,
 				F54DE8091EF1128D0089DDA1 /* Main.storyboard in Resources */,
 			);
@@ -327,23 +327,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F54DE8561EF118FC0089DDA1 /* HFWelcomeViewController.swift in Sources */,
+				F5239E251EF7C03B0059E082 /* HFNetworkManager.swift in Sources */,
+				F5239E2B1EF7C03B0059E082 /* HFStartViewController.swift in Sources */,
+				F5239E241EF7C03B0059E082 /* HFMainDataCent.swift in Sources */,
+				F5239E211EF7C03B0059E082 /* HFUserData.swift in Sources */,
 				F54DE8061EF1128D0089DDA1 /* ViewController.swift in Sources */,
-				F54DE8621EF13E870089DDA1 /* HFMainDataCent.swift in Sources */,
-				F54DE8471EF118380089DDA1 /* HFAppEngine.swift in Sources */,
-				F54DE85F1EF121D10089DDA1 /* HFBaseViewModel.swift in Sources */,
-				F54DE84B1EF118390089DDA1 /* HFAlertController.swift in Sources */,
-				F54DE85C1EF11AF20089DDA1 /* AppConfiguration.swift in Sources */,
-				F54DE85B1EF11AF20089DDA1 /* API.swift in Sources */,
-				F54DE84E1EF118390089DDA1 /* HFStartViewController.swift in Sources */,
-				F54DE84D1EF118390089DDA1 /* NSDate+Format.m in Sources */,
+				F5239E271EF7C03B0059E082 /* HFWebViewController.swift in Sources */,
+				F5239E261EF7C03B0059E082 /* HFAlertController.swift in Sources */,
+				F5239E221EF7C03B0059E082 /* AppDelegate+Extension.swift in Sources */,
+				F5239E281EF7C03B0059E082 /* NSDate+Format.m in Sources */,
+				F5239E1D1EF7C03B0059E082 /* API.swift in Sources */,
+				F5239E2D1EF7C03B0059E082 /* HFWelcomeViewController.swift in Sources */,
+				F5239E1E1EF7C03B0059E082 /* AppConfiguration.swift in Sources */,
 				F54DE8041EF1128D0089DDA1 /* AppDelegate.swift in Sources */,
-				F5239D5E1EF76D850059E082 /* AppDelegate+Extension.swift in Sources */,
-				F54DE8521EF118880089DDA1 /* HFLoginViewController.swift in Sources */,
-				F54DE8601EF121D10089DDA1 /* HFUserData.swift in Sources */,
-				F54DE84C1EF118390089DDA1 /* HFWebViewController.swift in Sources */,
-				F54DE8481EF118380089DDA1 /* HFNetworkManager.swift in Sources */,
-				F54DE8461EF118380089DDA1 /* HFDataCent.swift in Sources */,
+				F5239E291EF7C03B0059E082 /* HFLoginViewController.swift in Sources */,
+				F5239E1F1EF7C03B0059E082 /* HFBaseViewModel.swift in Sources */,
+				F5239E201EF7C03B0059E082 /* HFDataCent.swift in Sources */,
+				F5239E231EF7C03B0059E082 /* HFAppEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
