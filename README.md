@@ -21,22 +21,31 @@
 2. 安装并初始化项目CocoaPod（如果已安装可跳过）
 
 > 安装CocoaPod  
+
 ```bash
 $ gem install cocoapods
 ```
+
 > 更新Pod规格库  
+
 ```bash
 $ pod setup
 ```
+
 > 跳转到项目根目录  
+
 ```bash
 $ cd yourPath(项目所在目录) 
 ```
+
 > 初始化Pod  
+
 ```bash
 $ pod init
 ```
+
 3. 打开项目根目录*Podfile*文件添加依赖库列表
+
 ```ruby
   pod 'SVProgressHUD'
   pod 'Alamofire'
@@ -45,10 +54,13 @@ $ pod init
   pod 'CryptoSwift'
   pod 'IQKeyboardManager'
 ```
+
 4. 安装依赖库
+
 ```bash
 $ pod install
 ``` 
+
 5. 安装完成后重新打开项目文件夹，点击后缀为**.xcworkspace**的项目文件重新打开项目
 6. 在AppDelegate中运行引擎
 ```swift
