@@ -169,6 +169,7 @@ $ pod install
 ```
 
 > 如果您需要拥有属于自己的自定义UITabBarController，那么我们还提供了一个全新的函数支持您的想法，首先我们找到**setupMainController**函数，把我们希望使用的UITabBarController在此创建，并将它返回。  
+
 ```swift
     /// 设置自定义主控制器
     /// - 此方法在需要使用自定义UITabBarController的时候调用
