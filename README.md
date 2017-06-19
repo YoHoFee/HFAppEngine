@@ -17,8 +17,8 @@
 
 <h2 id = "2">二、安装</h2>
 
-1. 将AppEngine文件夹拖入项目目录。
-2. 安装并初始化项目CocoaPod（如果已安装可跳过）
+1 将AppEngine文件夹拖入项目目录。
+2 安装并初始化项目CocoaPod（如果已安装可跳过）
 
 > 安装CocoaPod  
 
@@ -44,7 +44,7 @@ $ cd yourPath(项目所在目录)
 $ pod init
 ```
 
-3. 打开项目根目录*Podfile*文件添加依赖库列表
+3 打开项目根目录*Podfile*文件添加依赖库列表
 
 ```ruby
   pod 'SVProgressHUD'
@@ -55,14 +55,14 @@ $ pod init
   pod 'IQKeyboardManager'
 ```
 
-4. 安装依赖库
+4 安装依赖库
 
 ```bash
 $ pod install
 ``` 
 
-5. 安装完成后重新打开项目文件夹，点击后缀为**.xcworkspace**的项目文件重新打开项目
-6. 在AppDelegate中运行引擎
+5 安装完成后重新打开项目文件夹，点击后缀为**.xcworkspace**的项目文件重新打开项目
+6 在AppDelegate中运行引擎
 ```swift
  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
