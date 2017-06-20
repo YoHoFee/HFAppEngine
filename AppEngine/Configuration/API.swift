@@ -12,7 +12,7 @@ class API: NSObject {
 
     
     // MARK: 服务器地址
-    static let baseURL          = "http://shijia.antiphon168.com/"
+    static let baseURL          = ""
     
     
     
@@ -33,7 +33,7 @@ class API: NSObject {
     
     
     // MARK: 登陆
-    static let login            = "/Api/common/Login"
+    static let login            = ""
     
     // MARK: 注册
     static let register         = ""
