@@ -11,7 +11,9 @@ import UIKit
 /// 主数据中心，用于存储通用数据
 class HFMainDataCent: HFDataCent {
     
-    var data_UserData: HFUserData? 
+    var data_UserData: HFUserData?
+    
+    
 
     // MARK: 本地化存储（归档/反归档）
     /// 从本地读取

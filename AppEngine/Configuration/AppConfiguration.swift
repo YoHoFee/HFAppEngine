@@ -17,7 +17,10 @@ let savePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDoma
 class HFAppConfiguration: NSObject {
     
     // 是否允许跳过登录限制
-    static let isAllowSkipLogin = true
+    static let isAllowSkipLogin = false
+    
+    // 请求超时时间设置
+    static let requestOutTime = 10
     
     // 服务器的响应中 消息 字段Key
     static let respond_MsgKey = "msg"

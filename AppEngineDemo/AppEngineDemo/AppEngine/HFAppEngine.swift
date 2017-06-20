@@ -17,6 +17,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 单例
     static let shared = HFAppEngine.init()
     
+    /// 窗口
     private lazy var window: UIWindow? = {
         
         guard let obj = UIApplication.shared.delegate?.window else {
@@ -40,6 +41,8 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 主数据中心
     internal let mainDataCent: HFMainDataCent = HFMainDataCent()
     
+    /// 网络管理类
+    internal let networkManager: HFNetworkManager = HFNetworkManager()
     
     
     // MARK: 程序运行方法
@@ -363,7 +366,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
         flag = true
         
-        
+
         group.notify(queue: .main) {
             
             if complete == nil { return }
