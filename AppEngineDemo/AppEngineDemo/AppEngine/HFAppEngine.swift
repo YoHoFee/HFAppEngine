@@ -205,23 +205,31 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
                 return
             }
             
-            // 执行登录前置任务池
-            self.loginPrepositionTaskPool(complete: { (flag) in
-                SVProgressHUD.dismiss(completion: {
-                    
-                    if flag == true {
-                        self.mainDataCent.writeDataToLocal()
-                        complete(true,info == nil ? "" : info!)
-                        HFAppConfiguration.setupLoginSucceedHandle(result: (resp?[HFAppConfiguration.respond_DataKey])!, NextExecute: {
-                            self.execute!(self.setupMainViewController())
-                        })
+            HFAppConfiguration.setupLoginSucceedHandle(result: (resp?[HFAppConfiguration.respond_DataKey])!, NextExecute: { (isSuccess, msg) in
+                
+                if isSuccess == false {
+                    complete(false,msg)
+                    return
+                }
+                 // 执行登录前置任务池
+                self.loginPrepositionTaskPool(complete: { (flag) in
+                    SVProgressHUD.dismiss(completion: {
                         
-                    }else {
-                        complete(flag,"数据获取失败")
-                    }
-                    
+                        if flag == true {
+                            self.mainDataCent.writeDataToLocal()
+                            complete(true,info == nil ? "" : info!)
+                            self.execute!(self.setupMainViewController())
+                            
+                        }else {
+                            complete(flag,"数据获取失败")
+                        }
+                        
+                    })
                 })
+                
             })
+           
+            
             
             
         }
@@ -257,8 +265,10 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
             
             // 请求失败时
             if status != 1 {
-    
-                HFAlertController.showOneBtnAlertController(controller: self.mainViewController!, title: "错误", message: info!,yesCallBack: { (_) in
+                guard let VC = UIApplication.shared.keyWindow?.rootViewController else {
+                    return
+                }
+                HFAlertController.showOneBtnAlertController(controller: VC, title: "错误", message: info!,yesCallBack: { (_) in
                     self.loginOut()
                 })
             
@@ -273,7 +283,10 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
                     complete(true,info == nil ? "" : info!)
                     
                 }else {
-                    HFAlertController.showOneBtnAlertController(controller: self.mainViewController!, title: "错误", message: info!,yesCallBack: { (_) in
+                    guard let VC = UIApplication.shared.keyWindow?.rootViewController else {
+                        return
+                    }
+                    HFAlertController.showOneBtnAlertController(controller: VC, title: "错误", message: info!,yesCallBack: { (_) in
                         self.loginOut()
                     })
                 }
@@ -366,7 +379,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
         flag = true
         
-
+        
         group.notify(queue: .main) {
             
             if complete == nil { return }

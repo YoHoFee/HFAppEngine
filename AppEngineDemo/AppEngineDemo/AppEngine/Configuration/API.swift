@@ -12,7 +12,7 @@ class API: NSObject {
 
     
     // MARK: 服务器地址
-    static let baseURL          = ""
+    static let baseURL          = "http://serve.yohofee.com/"
     
     
     
