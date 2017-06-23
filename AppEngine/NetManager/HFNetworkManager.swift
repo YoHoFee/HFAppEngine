@@ -14,9 +14,15 @@ import SVProgressHUD
 class HFNetworkManager: NSObject {
     
     /// 请求池
-    var requestPool: Dictionary<String,String> = [:]
+    private var requestPool: Dictionary<String,String> = [:]
     /// 请求编号主键
-    var requestNumber: Int = 1
+    private var requestNumber: Int = 1
+    /// 会话管理
+    private lazy var sessionManager:SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = TimeInterval(HFAppConfiguration.requestOutTime)
+        return Alamofire.SessionManager(configuration: configuration)
+    }()
     
     
     /// 请求连接
@@ -44,14 +50,10 @@ class HFNetworkManager: NSObject {
         HFAppEngine.shared.networkManager.requestPool[api] = "\(HFAppEngine.shared.networkManager.requestNumber)"
         HFAppEngine.shared.networkManager.requestNumber += 1
         
- 
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = TimeInterval(HFAppConfiguration.requestOutTime)
-        
         
         print("———————— 发起请求 ————————\n请求名称: \(description)\n请求编号: \(HFAppEngine.shared.networkManager.requestPool[api]!)\n请求方式: \(method.rawValue)\n地址: \(api)\n参数: \(JSON(parameters ?? [:]))\n—————————————————————\n")
         
-        Alamofire.request(api, method: method, parameters: parameters).responseJSON { (resp) in
+        HFAppEngine.shared.networkManager.sessionManager.request(api, method: method, parameters: parameters).responseJSON { (resp) in
             let url = resp.request?.url?.absoluteString
             let data = JSON(resp.result.value as Any)
             let status = data["status"].intValue

@@ -17,7 +17,7 @@ let savePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDoma
 class HFAppConfiguration: NSObject {
     
     // 是否允许跳过登录限制
-    static let isAllowSkipLogin = true
+    static let isAllowSkipLogin = false
     
     // 请求超时时间设置
     static let requestOutTime = 10
@@ -109,10 +109,12 @@ class HFAppConfiguration: NSObject {
     /// - Parameters:
     ///   - result: 返回的结果
     ///   - NextExecute: 下一步操作
-    class func setupLoginSucceedHandle(result:JSON, NextExecute: (Void) -> Void) {
+    class func setupLoginSucceedHandle(result:JSON, NextExecute: (_ isSuccess: Bool,_ msg: String) -> Void) {
         
-
-        NextExecute()
+        
+        
+        /// 当您完成您的操作时，请调用此闭包并告诉引擎您处理的结果是否允许登录，isSuccess为false时将登录失败，并且弹窗提示您传递的msg
+        NextExecute(true,"msg")
         
     }
     
