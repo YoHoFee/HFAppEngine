@@ -12,6 +12,8 @@ import UIKit
 
 class HFDataCent: NSObject {
     
+ 
+    
     internal func uploadImages(images:[UIImage],complete:@escaping ((_ isSucceed: Bool,_ msg: String, _ data: String) -> Void)) {
         
         let group = DispatchGroup()
@@ -189,15 +191,11 @@ class HFDataCent: NSObject {
         
     }
     
+    
 
 //    func cleanAllData() -> Void {
 //        
-//        var count: u_int
-//        let properties: objc_property_t = class_copyPropertyList(self.classForCoder, &count)
-//        for i in 0..<count {
-//            let propertyName = property_getName(properties[0])
-//            
-//        }
+//        
 //        
 //    }
 

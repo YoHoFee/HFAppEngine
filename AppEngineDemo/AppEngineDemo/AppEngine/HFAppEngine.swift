@@ -45,7 +45,9 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     internal let networkManager: HFNetworkManager = HFNetworkManager()
     
     
-    // MARK: 程序运行方法
+    
+    
+    // MARK: - 程序运行方法
     
     
     /// 运行引擎 - 默认函数
@@ -63,7 +65,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     }
     
     /// 引擎主函数
-    ///
+    ///     此方法需要手动创建Windouw并且展示
     /// - Parameter loadEnd: loadEnd description
     internal func run(execute:@escaping ((UIViewController) -> Void)) {
         self.execute = execute
@@ -133,9 +135,6 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
      
     }
     
-    
-    
-    
     /// 设置导航栏控制器
     ///
     /// - Returns: return value description
@@ -160,7 +159,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         return self.startViewController!
     }
     
-    
+
     /// 跳转至主控制器
     internal func gotoMainController() {
         self.execute!(self.setupMainViewController())
@@ -173,7 +172,11 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     }
     
     
-    // MARK: 用户登录模块
+    
+    
+    
+    
+    // MARK: - 用户登录模块
     /// 登录
     ///
     /// - Parameters:
@@ -366,7 +369,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
     
     
-    // MARK: 任务池
+    // MARK: - 任务池
     
     
     /// 启动前置任务池
@@ -419,7 +422,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
     
     
-    // MARK: 效果模块
+    // MARK: - 效果模块
     
     
     /// 注册运动动态效果
@@ -491,7 +494,10 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     }
     
 
-    // MARK: 验证码定时器模块
+    
+    
+    
+    // MARK: - 验证码定时器模块
     
     
     /// 验证码定时器
