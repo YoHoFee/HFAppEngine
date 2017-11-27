@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  AppEngineDemo
 //
-//  Created by 姚鸿飞 on 2017/10/24.
+//  Created by 姚鸿飞 on 2017/6/14.
 //  Copyright © 2017年 姚鸿飞. All rights reserved.
 //
 
@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // 启动App引擎
         HFAppEngine.run()
+        
         
         return true
     }

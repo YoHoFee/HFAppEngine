@@ -22,20 +22,20 @@ class HFAppConfiguration: NSObject {
     // 请求超时时间设置
     static let requestOutTime = 10
     
-    // 服务器的响应中 消息 字段Key
-    static let respond_MsgKey = "msg"
-    
-    // 服务器的响应中 状态 字段Key
-    static let respond_StatusKey = "status"
-    
-    // 服务器的响应中 数据 字段Key
-    static let respond_DataKey = "data"
-    
-    // 登录接口请求参数 账号 字段Key
-    static let login_ApiAccountKey = "phone"
-    
-    // 登录接口请求参数 密码 字段Key
-    static let login_ApiPasswordKey = "password"
+//    // 服务器的响应中 消息 字段Key
+//    static let respond_MsgKey = "msg"
+//
+//    // 服务器的响应中 状态 字段Key
+//    static let respond_StatusKey = "status"
+//
+//    // 服务器的响应中 数据 字段Key
+//    static let respond_DataKey = "data"
+//
+//    // 登录接口请求参数 账号 字段Key
+//    static let login_ApiAccountKey = "phone"
+//
+//    // 登录接口请求参数 密码 字段Key
+//    static let login_ApiPasswordKey = "password"
     
     /// 设置需要展示的控制器
     /// - 此方法默认会添加一个UITabBarController

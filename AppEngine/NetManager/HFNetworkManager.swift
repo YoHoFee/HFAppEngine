@@ -78,7 +78,7 @@ class HFNetworkManager: NSObject {
                     print("———————— 连接失败 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n请求方式: \(method.rawValue)\n地址: \(api)\n异常: \(data["msg"].stringValue))\n—————————————————————\n")
                     SVProgressHUD.dismiss()
                     HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: url!)
-                    HFAppEngine.shared.loginDidFailure(msg: data["msg"].stringValue)
+//                    HFAppEngine.shared.loginDidFailure(msg: data["msg"].stringValue)
                     return
                 } else {
                     

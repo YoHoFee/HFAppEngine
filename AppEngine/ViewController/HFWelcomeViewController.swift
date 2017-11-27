@@ -57,55 +57,40 @@ class HFWelcomeViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return 4
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        let imageName = "ImageName + row"
+        let imageName = "bg" + "\(indexPath.row + 1)"
         let imageView = UIImageView(image: UIImage(named: imageName))
         let button = UIButton()
         button.addTarget(self, action: #selector(self.buttonClickOnCallBack), for: UIControlEvents.touchUpInside)
         button.setTitle("点击进入", for: .normal)
         button.titleLabel?.textColor = UIColor.white
+        for item in cell.contentView.subviews {
+            item.removeFromSuperview()
+        }
         cell.contentView.addSubview(imageView)
         cell.contentView.addSubview(button)
         imageView.snp.makeConstraints { (make) in
             make.edges.equalTo(cell.contentView)
         }
         button.snp.makeConstraints { (make) in
-            make.leading.equalTo(cell.contentView).offset(100)
-            make.trailing.equalTo(cell.contentView).offset(-100)
-            make.bottom.equalTo(cell.contentView).offset(-70)
-            make.height.equalTo(60)
+            make.edges.equalTo(cell.contentView)
         }
-        if indexPath.row == 2 {
+        button.isHidden = true;
+        if indexPath.row == 3 {
             button.isHidden = false;
-        }else {
-            button.isHidden = true;
         }
         
-        
-        // 删除以下代码
-        let red = CGFloat(arc4random_uniform(255))/CGFloat(255.0)
-        let green = CGFloat( arc4random_uniform(255))/CGFloat(255.0)
-        let blue = CGFloat(arc4random_uniform(255))/CGFloat(255.0)
-        let alpha = CGFloat(arc4random_uniform(255))/CGFloat(255.0)
-        let label = UILabel()
-        label.text = "新特性（欢迎）界面"
-        label.textColor = UIColor.black
-        label.sizeToFit()
-        label.center = cell.contentView.center
-        cell.contentView.addSubview(label)
-        let color = UIColor.init(red:red, green:green, blue:blue , alpha: alpha)
-        cell.contentView.backgroundColor = color
-        // -----------
+    
         
         return cell
     }
     
-    func buttonClickOnCallBack() {
+    @objc func buttonClickOnCallBack() {
         HFAppEngine.shared.gotoLoginViewController()
     }
 

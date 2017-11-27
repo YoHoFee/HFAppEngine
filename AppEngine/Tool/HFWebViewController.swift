@@ -306,7 +306,7 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
     /**
      返回按钮回调
      */
-    func leftBtnBackCall() {
+    @objc func leftBtnBackCall() {
         if self.webView.canGoBack == true {
             webView.goBack()
             URLCache.shared.removeAllCachedResponses()
@@ -322,7 +322,7 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
     /**
      关闭按钮回调
      */
-    func escBtnBackCall() {
+    @objc func escBtnBackCall() {
         
         if self.enter == HFWebViewEnter.push {
             self.navigationController?.popViewController(animated: true)

@@ -26,16 +26,14 @@ class HFLoginViewController: UIViewController {
     }
     
     @IBAction func loginBtnClickCallBack(_ sender: UIButton) {
-        HFAppEngine.shared.login(account: phone.text!, password: pw.text!) { (_, _) in
-            
-        }
+        HFAppEngine.shared.gotoMainController()
     }
 
     @IBAction func getVerificationCodeBtnClickCallBack(_ sender: UIButton) {
         
         sender.isUserInteractionEnabled = false
         sender.setTitleColor(UIColor.gray, for: .normal)
-        HFAppEngine.shared.runVerificationCodeTimer { (flag) in
+        HFAppEngine.shared.runGeneralTimerTimer(duration: 60) { (flag) in
             sender.setTitle("\(flag)", for: .normal)
             if flag == 0 {
                 sender.isUserInteractionEnabled = true

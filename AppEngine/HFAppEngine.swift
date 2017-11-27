@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import SnapKit
 import CryptoSwift
 
 
@@ -15,41 +16,44 @@ import CryptoSwift
 class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
     /// 单例
-    static let shared = HFAppEngine.init()
+    @objc static let shared = HFAppEngine.init()
     
     /// 窗口
     private lazy var window: UIWindow? = {
         
-        guard let obj = UIApplication.shared.delegate?.window else {
+        guard let window = UIApplication.shared.delegate?.window else {
             return nil
         }
-        return obj
+        return window
     }()
     
     /// 加载Window执行代码块
     private var execute: ((UIViewController) -> Void)?
     
+    // 配置对象
+    @objc open var configuration: HFEngineConfiguration = HFEngineConfiguration.defaultConfiguration()
+    
     /// 主控制器
     private var mainViewController: UITabBarController?
     
     /// 登录控制器
-    private var loginViewComtroller: HFLoginViewController?
+    private var loginViewComtroller: UIViewController?
     
     /// 伪启动控制器
     private var startViewController: HFStartViewController?
     
     /// 主数据中心
-    internal let mainDataCent: HFMainDataCent = HFMainDataCent()
+    @objc open let mainDataCent: HFMainDataCent = HFMainDataCent()
     
     /// 网络管理类
-    internal let networkManager: HFNetworkManager = HFNetworkManager()
+    @objc open let networkManager: HFNetworkManager = HFNetworkManager()
     
     
     // MARK: 程序运行方法
     
     
     /// 运行引擎 - 默认函数
-    internal class func run() {
+    @objc open class func run() {
         guard let delegat = UIApplication.shared.delegate as? AppDelegate else { return }
         delegat.setupWindow()
         HFAppEngine.shared.run { (rootVC) in
@@ -65,7 +69,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 引擎主函数
     ///
     /// - Parameter loadEnd: loadEnd description
-    internal func run(execute:@escaping ((UIViewController) -> Void)) {
+    open func run(execute:@escaping ((UIViewController) -> Void)) {
         self.execute = execute
         
         SVProgressHUD.setDefaultStyle(.light)
@@ -80,50 +84,34 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
             
             if isSuccee == false {
                 if self.startViewController != nil {
-                    HFAlertController.showOneBtnAlertController(controller: self.startViewController!, title: "错误", message: "网络连接失败，请稍后再试！", yesCallBack: { (_) in
+                    HFAlertController.showOneBtnAlertController(controller: self.startViewController!, title: "错误", message: "网络连接失败，请稍后再试！", yesCallBack: { () in
                         self.gotoLoginViewController()
                     })
                 }
                 return
             }
             
-            // 判断是否需要进入登录界面的标记
-            var flg = false
-            //判断是否第一次打开App的标记
-            var welcomeFlag = false
-            welcomeFlag = UserDefaults.standard.bool(forKey: "welcomeFlag")
-            flg = UserDefaults.standard.bool(forKey: "flg")
-            if welcomeFlag == false {
+            // 检查App状态
+            switch self.checkAppStatus() {
+                
+            // 第一次开启
+            case .FirstRun:
+                
                 let VC = HFWelcomeViewController(nibName: "HFWelcomeViewController", bundle: nil)
-                self.execute!(VC)
-                UserDefaults.standard.set(true, forKey: "welcomeFlag")
-            }else {
-                if flg == false {
-                    let VC = HFLoginViewController()
-                    self.execute!(VC)
-                    UserDefaults.standard.set(true, forKey: "flg")
-                }else {
-                    if self.mainDataCent.readDataFormLocal() == false {
-                        let VC = HFLoginViewController()
-                        self.execute!(VC)
-                    }else {
-                        //                            self.loadEnd!(self.setupMainViewController())
-                        
-                        self.loginOfAuto { (isSucceed, msg) in
-                            if isSucceed == true {
-                                self.execute!(self.setupMainViewController())
-                            } else {
-                                
-                                self.loginDidFailure(msg: msg)
-                                
-                            }
-                        }
-                        
-                        
-                        
-                    }
-                    
-                }
+                self.execute!(VC)                           // 显示欢迎界面
+                self.resetAppStatus()
+                
+            // 未登录
+            case .NotLogin:
+                
+                let VC = UINavigationController(rootViewController: HFLoginViewController())
+                self.execute!(VC)                           // 显示登录界面
+                
+            // 已登录
+            case .DidLogin:
+                
+                let VC = self.setupMainViewController()
+                self.execute!(VC)                           // 显示主控制器
                 
             }
             
@@ -133,21 +121,17 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
      
     }
     
-    
-    
-    
     /// 设置导航栏控制器
     ///
     /// - Returns: return value description
     private func setupMainViewController() -> UITabBarController {
-        
         let obj = UITabBarController()
         obj.tabBar.isTranslucent = false
         obj.tabBar.tintColor = UIColor.orange
         self.mainViewController = obj
         self.mainViewController!.viewControllers = HFAppConfiguration.setupViewController()
         self.mainViewController!.delegate = self
-        return mainViewController!;
+        return mainViewController!
         
     }
     
@@ -160,205 +144,79 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         return self.startViewController!
     }
     
-    
     /// 跳转至主控制器
-    internal func gotoMainController() {
+    internal func gotoMainController() -> Void {
+        self.resetAppStatus()
         self.execute!(self.setupMainViewController())
     }
     
     /// 跳转至登录控制器
-    internal func gotoLoginViewController() {
-        self.loginViewComtroller = HFLoginViewController()
+    internal func gotoLoginViewController() -> Void {
+        self.loginViewComtroller = UINavigationController(rootViewController: HFLoginViewController())
         self.execute!(self.loginViewComtroller!)
     }
     
+    /// 检查App启动状态
+    ///
+    /// - Returns: return value description
+    private func checkAppStatus() -> AppStatus {
+        
+        let appStatusStr    = UserDefaults.standard.string(forKey: HFEngineConfiguration.appStatusKey) == nil ? AppStatus.FirstRun.rawValue : UserDefaults.standard.string(forKey: HFEngineConfiguration.appStatusKey)!
+        
+        var appStatus       = AppStatus(rawValue: appStatusStr)
+        
+        if  appStatus == AppStatus.FirstRun && self.configuration.isNeedWelcomeView == false {
+            appStatus       = AppStatus.NotLogin
+        }
+        
+        if self.configuration.autoLoginByLocalTokenKey != nil && (UserDefaults.standard.string(forKey: self.configuration.autoLoginByLocalTokenKey!) == nil) {
+            appStatus       = AppStatus.NotLogin
+        }
+        
+        return appStatus!
+        
+    }
     
-    // MARK: 用户登录模块
-    /// 登录
-    ///
-    /// - Parameters:
-    ///   - account: 用户名
-    ///   - password: 密码
-    ///   - complete: complete description
-    internal func login(account: String, password: String, complete: @escaping ((_ isSuccee: Bool, _ msg: String) -> Void)) {
+    /// 重置App启动状态
+    private func resetAppStatus() -> Void {
         
-        if HFAppConfiguration.isAllowSkipLogin == true { self.gotoMainController(); return }
-        
-        let param:[String:Any] = [HFAppConfiguration.login_ApiAccountKey:account,HFAppConfiguration.login_ApiPasswordKey:password.md5()]
-        
-        HFNetworkManager.request(url: API.login, method: .post, parameters: param, description: "登录") { (error, resp) in
-            
-            
-            // 连接失败时
-            if error != nil {
-                complete(false, error!.localizedDescription)
-                return
-            }
-            
-            let info: String? = resp?[HFAppConfiguration.respond_MsgKey].stringValue
-            
-            let status: Int? = resp?[HFAppConfiguration.respond_StatusKey].intValue
-            
-            // 请求失败时
-            if status != 1 {
-                complete(false, info == nil ? "" : info!)
-                return
-            }
-            
-            HFAppConfiguration.setupLoginSucceedHandle(result: (resp?[HFAppConfiguration.respond_DataKey])!, NextExecute: { (isSuccess, msg) in
-                
-                if isSuccess == false {
-                    complete(false,msg)
-                    return
-                }
-                 // 执行登录前置任务池
-                self.loginPrepositionTaskPool(complete: { (flag) in
-                    SVProgressHUD.dismiss(completion: {
-                        
-                        if flag == true {
-                            self.mainDataCent.writeDataToLocal()
-                            complete(true,info == nil ? "" : info!)
-                            self.execute!(self.setupMainViewController())
-                            
-                        }else {
-                            complete(flag,"数据获取失败")
-                        }
-                        
-                    })
-                })
-                
-            })
-           
-            
-            
+        switch self.checkAppStatus() {
+        case .FirstRun:
+            UserDefaults.standard.set(AppStatus.NotLogin.rawValue, forKey: HFEngineConfiguration.appStatusKey)
+        case .NotLogin:
+            UserDefaults.standard.set(AppStatus.DidLogin.rawValue, forKey: HFEngineConfiguration.appStatusKey)
+        case .DidLogin: break
             
         }
         
+        
     }
-    /// 自动登录
-    ///
-    /// - Parameter complete: complete description
-    internal func loginOfAuto(complete: @escaping ((_ isSuccee: Bool, _ msg: String) -> Void)) {
+    
+    private func taskPoolDemonstration(flag:Bool,complete:@escaping ((Bool) -> Void)) -> Void {
         
         
-//        SVProgressHUD.show(withStatus: "连接中...")
-        let param:[String:Any] = ["timetoken":self.mainDataCent.data_UserData!.data_Token]
-        
-        HFNetworkManager.request(url: API.autoLogin, method: .post, parameters: param, description: "自动登录") { (error, resp) in
-            SVProgressHUD.dismiss()
-            // 连接失败时
-            if error != nil {
-                guard let rootVC = self.window?.rootViewController else {
-                    self.loginOut()
-                    return
-                }
-                HFAlertController.showOneBtnAlertController(controller:rootVC , title: "错误", message: error!.localizedDescription,yesCallBack: { (_) in
-                    self.loginOut()
-                })
-         
-                return
-            }
+        if self.configuration.isEnabledDemonstration == true {
+            let label = UILabel()
+            label.text = "伪启动页，演示中5秒后自动消失"
+            label.sizeToFit()
+            label.textColor = UIColor.black
+            label.font = UIFont.systemFont(ofSize: 15)
+            label.center = self.startViewController!.view.center
             
-            let info: String? = resp?["msg"].stringValue
+            self.startViewController?.view.addSubview(label)
             
-            let status: Int? = resp?["status"].intValue
-            
-            // 请求失败时
-            if status != 1 {
-                guard let VC = UIApplication.shared.keyWindow?.rootViewController else {
-                    return
-                }
-                HFAlertController.showOneBtnAlertController(controller: VC, title: "错误", message: info!,yesCallBack: { (_) in
-                    self.loginOut()
-                })
-            
-                return
-            }
-            
-            self.loginPrepositionTaskPool(complete: { (flag) in
-                SVProgressHUD.dismiss()
-                if flag == true {
-                    // 请求成功时
-                    _ = self.mainDataCent.writeDataToLocal()
-                    complete(true,info == nil ? "" : info!)
+            DispatchQueue.init(label: "").asyncAfter(deadline: DispatchTime.now() + 5, execute: DispatchWorkItem(block: {
+                DispatchQueue.main.sync(execute: {
                     
-                }else {
-                    guard let VC = UIApplication.shared.keyWindow?.rootViewController else {
-                        return
-                    }
-                    HFAlertController.showOneBtnAlertController(controller: VC, title: "错误", message: info!,yesCallBack: { (_) in
-                        self.loginOut()
-                    })
-                }
-            })
+                    complete(flag)
+                })
+            }))
             
             
+        }else {
+            complete(flag)
             
         }
-        
-        
-    }
-    /// 注销登录
-    internal func loginOut() {
-        
-        self.mainDataCent.data_UserData = HFUserData(UserID: "", MID: "", Token: "", RefreshToken: "", PhoneNumber: "")
-        let VC = HFLoginViewController(nibName: "HFLoginViewController", bundle: Bundle.main)
-        self.execute!(VC)
-        self.mainViewController = nil
-        _ = self.mainDataCent.cleanLocalData()
-        UserDefaults.standard.set(false, forKey: "flg")
-        
-    }
-    /// 忘记密码
-    ///
-    /// - Parameters:
-    ///   - account: 手机号
-    ///   - password: 密码
-    ///   - vcode: 验证码
-    ///   - complete: complete description
-    internal func forgetPassword(account: String, password: String, vcode: String, complete: @escaping ((_ isSuccee: Bool, _ msg: String) -> Void)) {
-        
-        let param:[String:Any] = ["phone":account,
-                                  "password":password.md5(),
-                                  "code":vcode]
-        
-        HFNetworkManager.request(url: API.ForgetPwd, method: .post, parameters: param, description: "忘记密码") { (error, resp) in
-            
-            // 连接失败时
-            if error != nil {
-                complete(false, error.debugDescription)
-                return
-            }
-            
-            let info: String? = resp?["msg"].stringValue
-            
-            let status: Int? = resp?["status"].intValue
-            
-            // 请求失败时
-            if status != 1 {
-                complete(false, info == nil ? "" : info!)
-                return
-            }
-            
-            // 请求成功时
-            complete(true, info!)
-            
-            
-            
-        }
-        
-    }
-    /// 登录失效
-    ///
-    /// - Parameter msg: 失效msg
-    internal func loginDidFailure(msg:String) {
-        guard let VC = UIApplication.shared.keyWindow?.rootViewController else {
-            return
-        }
-        HFAlertController.showOneBtnAlertController(controller: VC, title: "错误", message: msg) { (_) in
-            self.loginOut()
-        }
-
         
     }
     
@@ -372,7 +230,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 启动前置任务池
     ///
     /// - Parameter complete: complete description
-    internal func startPrepositionTaskPool(complete:((Bool) -> Void)?) {
+    private func startPrepositionTaskPool(complete:((Bool) -> Void)?) {
         
         let group = DispatchGroup()
         var flag = true
@@ -384,37 +242,13 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
             
             if complete == nil { return }
             
-            complete!(flag)
-            // 删除以下代码
-            sleep(5)
-            
+            self.taskPoolDemonstration(flag: flag, complete: complete!)
             
         }
         
         
     }
-    /// 登录前置任务池
-    ///
-    /// - Parameter loadEnd: 当所有数据加载任务完成时调用
-    internal func loginPrepositionTaskPool(complete:((Bool) -> Void)?) {
-        
-        let group = DispatchGroup()
-        let flag = true
-        
-       
-        
-        group.notify(queue: .main) {
-            
-            if complete == nil { return }
-            
-            complete!(flag)
-            
-            
-        }
-        
-        
-    }
-    
+
     
     
     
@@ -466,10 +300,10 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     }
     
     //播放启动画面动画
-    private func launchAnimation(beforeAnimation:((Void) -> Void)) {
+    private func launchAnimation(beforeAnimation:(() -> Void)) {
   
         
-            //获取启动图片
+            //获取启动图片，
             let launchImage = self.startViewController!.imageView.image
             let launchview = UIImageView(frame: UIScreen.main.bounds)
             launchview.image = launchImage
@@ -495,37 +329,34 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
     
     /// 验证码定时器
-    var verificationCodeTimer: Timer?
+    private var generalTimer: Timer?
     /// 验证码定时器回调
-    private var verificationCodeTimerCallBack: ((_ time: Int) -> Void)?
+    private var generalTimerCallBack: ((_ time: Int) -> Void)?
     /// 验证码定时器标记
-    var verificationCodeTimerFlag: Int = 0
+    var generalTimerTime: Int = 0
     /// 运行验证码定时器
-    internal func runVerificationCodeTimer(callback:((_ time: Int) -> Void)?) {
-        self.verificationCodeTimerCallBack = callback
-        if self.verificationCodeTimer != nil { return }
-        
-        self.verificationCodeTimerFlag = 60;
-        
-        self.verificationCodeTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCallBack), userInfo: nil, repeats: true)
-        
+    internal func runGeneralTimerTimer(duration: Int, callback:((_ time: Int) -> Void)?) {
+        self.generalTimerCallBack = callback
+        if self.generalTimer != nil { return }
+        self.generalTimerTime = duration
+        self.generalTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCallBack), userInfo: nil, repeats: true)
     }
     /// 手动停止并销毁验证码定时器
-    internal func stopVerificationCodeTimer() {
-        self.verificationCodeTimer?.invalidate()
-        self.verificationCodeTimer = nil
-        self.verificationCodeTimerFlag = 0
+    internal func stopGeneralTimer() {
+        self.generalTimer?.invalidate()
+        self.generalTimer = nil
+        self.generalTimerTime = 0
     }
     /// 定时器回调
     @objc private func timerCallBack() {
-        if self.verificationCodeTimerCallBack != nil {
-            self.verificationCodeTimerCallBack!(self.verificationCodeTimerFlag)
+        if self.generalTimerCallBack != nil {
+            self.generalTimerCallBack!(self.generalTimerTime)
         }
-        if self.verificationCodeTimerFlag <= 0 {
-            self.verificationCodeTimer?.invalidate()
-            self.verificationCodeTimer = nil
+        if self.generalTimerTime <= 0 {
+            self.generalTimer?.invalidate()
+            self.generalTimer = nil
         }else {
-            self.verificationCodeTimerFlag -= 1
+            self.generalTimerTime -= 1
         }
     }
     

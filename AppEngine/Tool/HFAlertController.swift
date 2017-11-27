@@ -30,7 +30,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - title: 标题文本
     ///   - message: 弹窗内容
     ///   - yesCallBack: 确定按钮回调
-    class func showAlertController(controller: UIViewController, title: String, message: String, yesCallBack:((Void) -> Void)?) {
+    class func showAlertController(controller: UIViewController, title: String, message: String, yesCallBack:(() -> Void)?) {
         let obj = HFAlertController.alertController(title: title, message: message, yesCallBack: yesCallBack)
         controller.present(obj, animated: true, completion: nil)
     }
@@ -42,7 +42,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - title: 标题文本
     ///   - message: 弹窗内容
     ///   - yesCallBack: 确定按钮回调
-    class func showSheetAlertController(controller: UIViewController, title: String, message: String, yesCallBack:((Void) -> Void)?) {
+    class func showSheetAlertController(controller: UIViewController, title: String, message: String, yesCallBack:(() -> Void)?) {
         let obj = HFAlertController.alertController(title: title, message: message, preferredStyle: .actionSheet ,yesCallBack: yesCallBack)
         controller.present(obj, animated: true, completion: nil)
     }
@@ -54,7 +54,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - title: 标题文本
     ///   - message: 弹窗内容
     ///   - yesCallBack: 确定按钮回调
-    class func showOneBtnAlertController(controller: UIViewController, title: String, message: String, yesCallBack:((Void) -> Void)?) {
+    class func showOneBtnAlertController(controller: UIViewController, title: String, message: String, yesCallBack:(() -> Void)?) {
         let obj = HFAlertController.oneBtnAlertController(title: title, message: message, yesCallBack: yesCallBack)
         controller.present(obj, animated: true, completion: nil)
     }
@@ -66,7 +66,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
      
      - returns: return value description
      */
-    class func alertController(title: String, message: String, preferredStyle: UIAlertControllerStyle = .alert, yesCallBack:((Void) -> Void)?) -> HFAlertController {
+    class func alertController(title: String, message: String, preferredStyle: UIAlertControllerStyle = .alert, yesCallBack:(() -> Void)?) -> HFAlertController {
         
         let obj = HFAlertController(title: title, message: message, preferredStyle: preferredStyle)
         let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
@@ -90,7 +90,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - yesBtnTitle: 确定按钮文本
     ///   - yesCallBack: 确定按钮回调
     /// - Returns: return value description
-    class func alertController(title: String, message: String, yesBtnTitle: String, yesCallBack:((Void) -> Void)?) -> HFAlertController {
+    class func alertController(title: String, message: String, yesBtnTitle: String, yesCallBack:(() -> Void)?) -> HFAlertController {
         
         let obj = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
@@ -113,7 +113,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - message: 弹框内容
     ///   - yesCallBack: 确定按钮回调
     /// - Returns: return value description
-    class func oneBtnAlertController(title: String, message: String, yesCallBack:((Void) -> Void)?) -> HFAlertController {
+    class func oneBtnAlertController(title: String, message: String, yesCallBack:(() -> Void)?) -> HFAlertController {
         
         let obj = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let yesAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (_) in
