@@ -63,26 +63,39 @@ class HFWelcomeViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
-        let imageName = "bg" + "\(indexPath.row + 1)"
-        let imageView = UIImageView(image: UIImage(named: imageName))
+        let color = UIColor(red: CGFloat(arc4random() % 255) / 255.0, green: CGFloat(arc4random() % 255) / 255.0, blue: CGFloat(arc4random() % 255) / 255.0, alpha: 1.0)
+        cell.backgroundColor = color
+        
+        let tintLabel = UILabel()
         let button = UIButton()
         button.addTarget(self, action: #selector(self.buttonClickOnCallBack), for: UIControlEvents.touchUpInside)
         button.setTitle("点击进入", for: .normal)
         button.titleLabel?.textColor = UIColor.white
+        tintLabel.text = "这是引导页，请向左滑动"
+        tintLabel.textColor = UIColor.white
+        tintLabel.font = UIFont.systemFont(ofSize: 15)
         for item in cell.contentView.subviews {
             item.removeFromSuperview()
         }
-        cell.contentView.addSubview(imageView)
+//        cell.contentView.addSubview(imageView)
         cell.contentView.addSubview(button)
-        imageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(cell.contentView)
-        }
+        
+//        imageView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(cell.contentView)
+//        }
         button.snp.makeConstraints { (make) in
             make.edges.equalTo(cell.contentView)
         }
+        
+
         button.isHidden = true;
         if indexPath.row == 3 {
             button.isHidden = false;
+        }else {
+            cell.contentView.addSubview(tintLabel)
+            tintLabel.snp.makeConstraints { (make) in
+                make.center.equalTo(cell.contentView)
+            }
         }
         
     
