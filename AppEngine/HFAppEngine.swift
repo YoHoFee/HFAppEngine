@@ -48,6 +48,11 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 网络管理类
     @objc open let networkManager: HFNetworkManager = HFNetworkManager()
     
+    /// 当前显示的控制器
+    open var currentDisplayViewController: UIViewController? {
+        get{ return self.currentViewController() }
+    }
+    
     
     // MARK: 程序运行方法
     
@@ -104,14 +109,16 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
             // 未登录
             case .NotLogin:
                 
-                let VC = UINavigationController(rootViewController: HFLoginViewController())
-                self.execute!(VC)                           // 显示登录界面
+                if self.configuration.isMustLogin == true {
+                    self.gotoLoginViewController()         // 显示登录界面
+                }else {
+                    self.execute!(self.setupMainViewController())
+                }
                 
             // 已登录
             case .DidLogin:
                 
-                let VC = self.setupMainViewController()
-                self.execute!(VC)                           // 显示主控制器
+               self.gotoMainController()                   // 显示主控制器
                 
             }
             
@@ -150,6 +157,18 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         self.execute!(self.setupMainViewController())
     }
     
+    /// 未登录跳转至主控制器
+    internal func gotoMainControllerWithNotLogin() -> Void {
+        self.execute!(self.setupMainViewController())
+    }
+    
+    /// 跳转至登录控制器
+    internal func gotoLoginViewControllerWithPush() -> Void {
+        self.loginViewComtroller = HFLoginViewController()
+        self.currentDisplayViewController?.navigationController?.pushViewController(self.loginViewComtroller!, animated: true)
+        
+    }
+    
     /// 跳转至登录控制器
     internal func gotoLoginViewController() -> Void {
         self.loginViewComtroller = UINavigationController(rootViewController: HFLoginViewController())
@@ -178,6 +197,11 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     }
     
     /// 重置App启动状态
+    func resetAppStatus(status: AppStatus) -> Void {
+        UserDefaults.standard.set(status.rawValue, forKey: HFEngineConfiguration.appStatusKey)
+    }
+    
+    /// 设置App启动状态
     private func resetAppStatus() -> Void {
         
         switch self.checkAppStatus() {
@@ -220,6 +244,23 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
     }
     
+    
+    /// 获取当前显示的控制器
+    ///
+    /// - Parameter base: 基控制器
+    /// - Returns: 当前显示的控制器
+    open func currentViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return currentViewController(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            return currentViewController(base: tab.selectedViewController)
+        }
+        if let presented = base?.presentedViewController {
+            return currentViewController(base: presented)
+        }
+        return base
+    }
     
     
     

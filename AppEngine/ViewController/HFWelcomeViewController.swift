@@ -91,7 +91,11 @@ class HFWelcomeViewController: UICollectionViewController {
     }
     
     @objc func buttonClickOnCallBack() {
-        HFAppEngine.shared.gotoLoginViewController()
+        if HFAppEngine.shared.configuration.isMustLogin == true {
+            HFAppEngine.shared.gotoLoginViewController()
+        }else {
+            HFAppEngine.shared.gotoMainControllerWithNotLogin()
+        }
     }
 
     // MARK: UICollectionViewDelegate
