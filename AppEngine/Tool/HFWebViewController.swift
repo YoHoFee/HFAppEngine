@@ -253,17 +253,18 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if keyPath == "estimatedProgress" {
-            let progress = change![NSKeyValueChangeKey.newKey] as! Float
-            if progress >= 1.0 {
-                self.progressView.setProgress(progress, animated: true)
+            let progress = change![NSKeyValueChangeKey.newKey] as! NSNumber
+            
+            if progress.floatValue >= 1.0 {
+                self.progressView.setProgress(progress.floatValue, animated: true)
                 UIView.animate(withDuration: 0.3, delay: 0.3, options: UIViewAnimationOptions(), animations: {
                     self.progressView.alpha = 0.0
-                    }, completion: { (_) in
-                        self.progressView.setProgress(0.0, animated: false)
+                }, completion: { (_) in
+                    self.progressView.setProgress(0.0, animated: false)
                 })
             }else {
                 self.progressView.alpha = 1.0
-                self.progressView.setProgress(progress, animated: true)
+                self.progressView.setProgress(progress.floatValue, animated: true)
             }
         }
         
