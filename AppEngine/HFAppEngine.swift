@@ -53,6 +53,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         get{ return self.currentViewController() }
     }
     
+    var token: HFToken? = HFToken.loadInLocation()
     
     // MARK: 程序运行方法
     
@@ -216,31 +217,45 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
     }
     
-    private func taskPoolDemonstration(flag:Bool,complete:@escaping ((Bool) -> Void)) -> Void {
+    private func taskPoolDemonstration(group: DispatchGroup) -> Void {
         
+        group.enter()
+        
+        var runTime = 10
         
         if self.configuration.isEnabledDemonstration == true {
             let label = UILabel()
-            label.text = "伪启动页，演示中5秒后自动消失"
+            label.text = "伪启动页，当App设置启动页后，这里会自动显示启动页，并在启动前置任务池中的任务执行完毕后进入App\n\n该演示界面\(runTime)秒后自动消失\n\n在HFEngineConfiguration中将isEnabledDemonstration设置为false可关闭该演示模式"
             label.sizeToFit()
             label.textColor = UIColor.black
             label.font = UIFont.systemFont(ofSize: 15)
-            label.center = self.startViewController!.view.center
-            
+            label.numberOfLines = 0
+            label.textAlignment = .center
             self.startViewController?.view.addSubview(label)
+            label.snp.makeConstraints { (make) in
+                make.leading.equalTo(self.startViewController!.view).offset(20)
+                make.trailing.equalTo(self.startViewController!.view).offset(-20)
+                make.center.equalTo(self.startViewController!.view)
+            }
             
-            DispatchQueue.init(label: "").asyncAfter(deadline: DispatchTime.now() + 5, execute: DispatchWorkItem(block: {
+            self.runGeneralTimerTimer(duration: runTime) { (time) in
+                label.text = "伪启动页，当App设置启动页后，这里会自动显示启动页，并在启动前置任务池中的任务执行完毕后进入App\n\n该演示界面\(runTime)秒后自动消失\n\n在HFEngineConfiguration中将isEnabledDemonstration设置为false可关闭该演示模式"
+                runTime -= 1
+            }
+        
+            
+            DispatchQueue.init(label: "").asyncAfter(deadline: DispatchTime.now() + 10, execute: DispatchWorkItem(block: {
                 DispatchQueue.main.sync(execute: {
-                    
-                    complete(flag)
+                    group.leave()
                 })
             }))
             
             
         }else {
-            complete(flag)
+            group.leave()
             
         }
+        
         
     }
     
@@ -264,6 +279,13 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
     
     
+    /// 登出
+    open func loginOut() {
+        self.gotoLoginViewController()
+        HFToken.cleanToken()
+    }
+    
+    
     
     // MARK: 任务池
     
@@ -278,12 +300,14 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
         flag = true
         
+        self.taskPoolDemonstration(group: group)
         
         group.notify(queue: .main) {
             
-            if complete == nil { return }
-            
-            self.taskPoolDemonstration(flag: flag, complete: complete!)
+            if flag == false {
+                print("启动任务池任务执行失败")
+            }
+            complete?(flag)
             
         }
         

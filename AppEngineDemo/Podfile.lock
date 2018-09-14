@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.5.1)
   - CryptoSwift (0.8.0)
   - IQKeyboardManager (5.0.4)
+  - ObjectMapper (3.3.0)
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.2)
   - SwiftyJSON (3.1.4)
@@ -10,6 +11,7 @@ DEPENDENCIES:
   - Alamofire
   - CryptoSwift
   - IQKeyboardManager
+  - ObjectMapper
   - SnapKit
   - SVProgressHUD
   - SwiftyJSON
@@ -18,10 +20,11 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   CryptoSwift: f81907430ebbe38b8404b4f6fb40f3c576a8755f
   IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 71fd4565c4541ab7c27fd20a3edd59582bbf9cef
+PODFILE CHECKSUM: 5dd8691eec58ccb41e63d9836abe95c07cbbd558
 
-COCOAPODS: 1.4.0.beta.1
+COCOAPODS: 1.4.0

@@ -13,5 +13,6 @@ target 'AppEngineDemo' do
   pod 'SnapKit'
   pod 'CryptoSwift'
   pod 'IQKeyboardManager'
+  pod 'ObjectMapper'
 
 end

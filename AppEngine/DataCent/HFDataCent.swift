@@ -38,9 +38,9 @@ class HFDataCent: NSObject {
                     return
                 }
                 
-                let info: String? = resp?["msg"].stringValue
+                let info: String? = resp?.msg
                 
-                let status: Int? = resp?["status"].intValue
+                let status: Int? = resp?.status
                 
                 // 请求失败时
                 if status != 1 {
@@ -53,7 +53,7 @@ class HFDataCent: NSObject {
                 
                 // 请求成功时
                 
-                let data = resp!["data"].dictionaryObject
+                let data = resp!.data!.dictionaryObject
                 if tmpStr != "" {
                     tmpStr += ","
                 }
@@ -90,9 +90,9 @@ class HFDataCent: NSObject {
                         return
                     }
                     
-                    let info: String? = resp?["msg"].stringValue
+                    let info: String? = resp?.msg
                     
-                    let status: Int? = resp?["status"].intValue
+                    let status: Int? = resp?.status
                     
                     // 请求失败时
                     if status != 1 {
@@ -102,7 +102,7 @@ class HFDataCent: NSObject {
                     
                     // 请求成功时
                     
-                    let data = resp!["data"].dictionaryObject
+                    let data = resp!.data!.dictionaryObject
                     let imgUrl = data!["imgUrl"] as! String
                     
                     complete(true, info!, imgUrl)

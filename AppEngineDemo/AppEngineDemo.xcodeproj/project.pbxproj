@@ -31,6 +31,8 @@
 		9B18ED0F1F9F19D600E51E1E /* HFWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECFB1F9F19D600E51E1E /* HFWebViewController.swift */; };
 		9B18ED121F9F30B800E51E1E /* HFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B18ED101F9F30B800E51E1E /* HFLoginViewController.xib */; };
 		9B18ED131F9F30B800E51E1E /* HFLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ED111F9F30B800E51E1E /* HFLoginViewController.swift */; };
+		9B8D1F3D214B497000515EB6 /* HFNetworkResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8D1F3C214B497000515EB6 /* HFNetworkResponseModel.swift */; };
+		9B8D1F3F214B4AA000515EB6 /* HFToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8D1F3E214B4AA000515EB6 /* HFToken.swift */; };
 		9B9659C2214A6B3F00A9C2A2 /* HFAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9659C1214A6B3E00A9C2A2 /* HFAlertController.swift */; };
 		BA75A4FE9D224DE37D86989D /* Pods_AppEngineDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E75CF7128BFB9103DC2CF09 /* Pods_AppEngineDemo.framework */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,8 @@
 		9B18ECFB1F9F19D600E51E1E /* HFWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWebViewController.swift; sourceTree = "<group>"; };
 		9B18ED101F9F30B800E51E1E /* HFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFLoginViewController.xib; sourceTree = "<group>"; };
 		9B18ED111F9F30B800E51E1E /* HFLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFLoginViewController.swift; sourceTree = "<group>"; };
+		9B8D1F3C214B497000515EB6 /* HFNetworkResponseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFNetworkResponseModel.swift; sourceTree = "<group>"; };
+		9B8D1F3E214B4AA000515EB6 /* HFToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFToken.swift; sourceTree = "<group>"; };
 		9B9659C1214A6B3E00A9C2A2 /* HFAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +158,7 @@
 				9B18ECE61F9F19D600E51E1E /* HFBaseViewModel.swift */,
 				9B18ECE71F9F19D600E51E1E /* HFDataCent.swift */,
 				9B18ECE81F9F19D600E51E1E /* HFUserData.swift */,
+				9B8D1F3E214B4AA000515EB6 /* HFToken.swift */,
 			);
 			path = DataCent;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				9B18ECEE1F9F19D600E51E1E /* HFNetworkManager.swift */,
+				9B8D1F3C214B497000515EB6 /* HFNetworkResponseModel.swift */,
 			);
 			path = NetManager;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -300,6 +307,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -353,6 +361,7 @@
 				9B18ED031F9F19D600E51E1E /* AppDelegate+Extension.swift in Sources */,
 				9B18ED041F9F19D600E51E1E /* HFAppEngine.swift in Sources */,
 				9B18ECFC1F9F19D600E51E1E /* AppConfiguration.swift in Sources */,
+				9B8D1F3F214B4AA000515EB6 /* HFToken.swift in Sources */,
 				9B18ED0E1F9F19D600E51E1E /* NSDate+Format.m in Sources */,
 				9B18ECC41F9F134800E51E1E /* ViewController.swift in Sources */,
 				9B18ED011F9F19D600E51E1E /* HFUserData.swift in Sources */,
@@ -368,6 +377,7 @@
 				9B9659C2214A6B3F00A9C2A2 /* HFAlertController.swift in Sources */,
 				9B18ED091F9F19D600E51E1E /* HFStartViewController.swift in Sources */,
 				9B18ECFE1F9F19D600E51E1E /* API.swift in Sources */,
+				9B8D1F3D214B497000515EB6 /* HFNetworkResponseModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
