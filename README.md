@@ -1,5 +1,5 @@
 # HFAppEngine
-**v1.0.0**
+**v2.1.0**
 
 > HFAppEngine是大多数App的通用引擎，封装了常用的跳转逻辑与方法，例如伪启动图、启动前置任务池、登录前置任务池、登录跳转、注销跳转、验证码定时等。    
 
@@ -14,7 +14,7 @@
 <h2 id = "1">一、环境要求</h2>
 * Xcode 8.1 或 更高
 * iOS 8     或 更高
-* Swift3.0  或 更高
+* Swift4.0
 * Objective-C
 
 <h2 id = "2">二、安装</h2>
@@ -55,6 +55,7 @@ $ pod init
   pod 'SnapKit'
   pod 'CryptoSwift'
   pod 'IQKeyboardManager'
+  pod 'ObjectMapper'
 ```
 
 4 安装依赖库
@@ -76,6 +77,12 @@ $ pod install
     }
 
 ```
+
+7 关闭HFEngineConfiguration中的演示模式
+```swift
+ self.isEnabledDemonstration     = false
+```
+
 
 **如果需要在Objective-C中使用，请点击[此处](http://www.cnblogs.com/Yun-Longcom/p/5809740.html)查看设置方式，按步骤设置Xcode即可正常调用，在Objective-C中方法名不变。**
 
