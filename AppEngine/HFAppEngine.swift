@@ -89,7 +89,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
             
             if isSuccee == false {
                 if self.startViewController != nil {
-                    HFAlertController.showOneBtnAlertController(controller: self.startViewController!, title: "错误", message: "网络连接失败，请稍后再试！", yesCallBack: { () in
+                    HFAlertController.showAlert(type: .OnlyConfirm, title: "错误", message: "网络连接失败，请稍后再试！", ConfirmCallBack: { (_, _) in
                         self.gotoLoginViewController()
                     })
                 }

@@ -27,11 +27,11 @@
 		9B18ED091F9F19D600E51E1E /* HFStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECF31F9F19D600E51E1E /* HFStartViewController.swift */; };
 		9B18ED0B1F9F19D600E51E1E /* HFWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECF51F9F19D600E51E1E /* HFWelcomeViewController.swift */; };
 		9B18ED0C1F9F19D600E51E1E /* HFMainDataCent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECF61F9F19D600E51E1E /* HFMainDataCent.swift */; };
-		9B18ED0D1F9F19D600E51E1E /* HFAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECF91F9F19D600E51E1E /* HFAlertController.swift */; };
 		9B18ED0E1F9F19D600E51E1E /* NSDate+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECFA1F9F19D600E51E1E /* NSDate+Format.m */; };
 		9B18ED0F1F9F19D600E51E1E /* HFWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ECFB1F9F19D600E51E1E /* HFWebViewController.swift */; };
 		9B18ED121F9F30B800E51E1E /* HFLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B18ED101F9F30B800E51E1E /* HFLoginViewController.xib */; };
 		9B18ED131F9F30B800E51E1E /* HFLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B18ED111F9F30B800E51E1E /* HFLoginViewController.swift */; };
+		9B9659C2214A6B3F00A9C2A2 /* HFAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9659C1214A6B3E00A9C2A2 /* HFAlertController.swift */; };
 		BA75A4FE9D224DE37D86989D /* Pods_AppEngineDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E75CF7128BFB9103DC2CF09 /* Pods_AppEngineDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,11 +62,11 @@
 		9B18ECF51F9F19D600E51E1E /* HFWelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWelcomeViewController.swift; sourceTree = "<group>"; };
 		9B18ECF61F9F19D600E51E1E /* HFMainDataCent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFMainDataCent.swift; sourceTree = "<group>"; };
 		9B18ECF81F9F19D600E51E1E /* NSDate+Format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Format.h"; sourceTree = "<group>"; };
-		9B18ECF91F9F19D600E51E1E /* HFAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAlertController.swift; sourceTree = "<group>"; };
 		9B18ECFA1F9F19D600E51E1E /* NSDate+Format.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Format.m"; sourceTree = "<group>"; };
 		9B18ECFB1F9F19D600E51E1E /* HFWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFWebViewController.swift; sourceTree = "<group>"; };
 		9B18ED101F9F30B800E51E1E /* HFLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFLoginViewController.xib; sourceTree = "<group>"; };
 		9B18ED111F9F30B800E51E1E /* HFLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFLoginViewController.swift; sourceTree = "<group>"; };
+		9B9659C1214A6B3E00A9C2A2 /* HFAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HFAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				9B18ECF81F9F19D600E51E1E /* NSDate+Format.h */,
-				9B18ECF91F9F19D600E51E1E /* HFAlertController.swift */,
 				9B18ECFA1F9F19D600E51E1E /* NSDate+Format.m */,
+				9B9659C1214A6B3E00A9C2A2 /* HFAlertController.swift */,
 				9B18ECFB1F9F19D600E51E1E /* HFWebViewController.swift */,
 			);
 			path = Tool;
@@ -350,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B18ED051F9F19D600E51E1E /* HFNetworkManager.swift in Sources */,
-				9B18ED0D1F9F19D600E51E1E /* HFAlertController.swift in Sources */,
 				9B18ED031F9F19D600E51E1E /* AppDelegate+Extension.swift in Sources */,
 				9B18ED041F9F19D600E51E1E /* HFAppEngine.swift in Sources */,
 				9B18ECFC1F9F19D600E51E1E /* AppConfiguration.swift in Sources */,
@@ -366,6 +365,7 @@
 				9B18ED0F1F9F19D600E51E1E /* HFWebViewController.swift in Sources */,
 				9B18ED131F9F30B800E51E1E /* HFLoginViewController.swift in Sources */,
 				9B18ED021F9F19D600E51E1E /* HFAppEngine+Enum.swift in Sources */,
+				9B9659C2214A6B3F00A9C2A2 /* HFAlertController.swift in Sources */,
 				9B18ED091F9F19D600E51E1E /* HFStartViewController.swift in Sources */,
 				9B18ECFE1F9F19D600E51E1E /* API.swift in Sources */,
 			);
