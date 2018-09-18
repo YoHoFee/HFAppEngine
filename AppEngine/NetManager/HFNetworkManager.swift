@@ -36,25 +36,33 @@ class HFNetworkManager: NSObject {
     ///   - description: 请求描述
     ///   - complete: complete description
     class func request(url: String,
-                       needBaseURL: Bool = true,
+                       needDefaultBaseURL: Bool = true,
                        method: HTTPMethod = .post,
                        parameters: Parameters? = nil,
                        description: String = "未命名请求",
                        complete: @escaping (_ error: Error? ,_ data:HFNetworkResponseModel?) -> Void) {
         
-        
         var api = url
-        if needBaseURL == true {
+        if needDefaultBaseURL == true {
             api = API.baseURL + url
         }
         
-        if HFAppEngine.shared.networkManager.requestPool[api] != nil {
-            //            complete(NSError(domain: "重复请求", code: 10088, userInfo: nil), nil)
+        var requestPoolKey: String = api
+        var paramDataMD5: String = ""
+        if parameters != nil {
+            let paramData =  try! JSON(parameters!).rawData()
+            paramDataMD5 = String.init(data: paramData, encoding: .utf8)!.md5()
+            requestPoolKey += "/\(paramDataMD5)"
+        }
+        
+        if HFAppEngine.shared.networkManager.requestPool[requestPoolKey] != nil {
+            print("============重复请求\nApi:\(api)\n参数MD5:\(paramDataMD5)\n该请求已被拦截\n==================")
+            complete(NSError(domain: "重复请求,requestPoolKey:\(requestPoolKey)", code: 10088, userInfo: nil), nil)
             return
         }
         
         
-        HFAppEngine.shared.networkManager.requestPool[api] = "\(HFAppEngine.shared.networkManager.requestNumber)"
+        HFAppEngine.shared.networkManager.requestPool[requestPoolKey] = "\(HFAppEngine.shared.networkManager.requestNumber)"
         HFAppEngine.shared.networkManager.requestNumber += 1
         
         var requestHeader: HTTPHeaders = ["language": UserDefaults.standard.array(forKey: "AppleLanguages")![0] as! String]
@@ -69,21 +77,29 @@ class HFNetworkManager: NSObject {
         
         print(requestHeader)
         
-        print("———————— 发起请求 ————————\n请求名称: \(description)\n请求编号: \(HFAppEngine.shared.networkManager.requestPool[api]!)\n请求方式: \(method.rawValue)\n地址: \(api)\n参数: \(JSON(parameters ?? [:]))\n—————————————————————\n")
+        print("———————— 发起请求 ————————\n请求名称: \(description)\n请求编号: \(HFAppEngine.shared.networkManager.requestPool[requestPoolKey]!)\n请求方式: \(method.rawValue)\n地址: \(api)\n参数: \(JSON(parameters ?? [:]))\n—————————————————————\n")
         
         HFAppEngine.shared.networkManager.sessionManager.request(api, method: method, parameters: parameters,headers: requestHeader).responseJSON { (resp) in
             let fullUrl = resp.request?.url?.absoluteString
             let data = JSON(resp.result.value as Any)
             let status = data["status"].intValue
             let code = data["code"].intValue
-            let requestNumber = HFAppEngine.shared.networkManager.requestPool[fullUrl!]!
+            var requestPoolKey: String = fullUrl!
+            var paramDataMD5: String = ""
+            if parameters != nil {
+                let paramData =  try! JSON(parameters!).rawData()
+                paramDataMD5 = String.init(data: paramData, encoding: .utf8)!.md5()
+                requestPoolKey += "/\(paramDataMD5)"
+            }
+            
+            let requestNumber = HFAppEngine.shared.networkManager.requestPool[requestPoolKey]!
             debugPrint(resp)
             let statusCode = resp.response == nil ? 0 : resp.response?.statusCode
             let dataSize = resp.data == nil ? 0 : resp.data?.count
             if resp.result.isSuccess == false {
                 
                 print("———————— 连接失败 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n状态码:\(statusCode!)\n请求方式: \(method.rawValue)\n地址: \(api)\n异常: \(String(describing: resp.result.error.debugDescription))\n—————————————————————\n")
-                HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: fullUrl!)
+                HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: requestPoolKey)
                 complete(resp.result.error!,nil)
                 return
                 
@@ -92,24 +108,24 @@ class HFNetworkManager: NSObject {
                 let instance = HFNetworkResponseModel(status: status, msg: data["msg"].string, data: data["data"], code: code, rawData: data)
                 if status == 1 {
                     print("———————— 收到响应 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n请求方式: \(method.rawValue)\n地址: \(api)\n状态: \(resp.result.isSuccess)\n状态码:\(statusCode!)\n包大小:\(dataSize!) bytes\n数据: \(data)\n—————————————————————\n")
-                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: fullUrl!)
+                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: requestPoolKey)
                     complete(nil,instance)
                     
                     return
                 }else if code == 10000 {
                     print("———————— 连接失败 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n状态码:\(statusCode!)\n请求方式: \(method.rawValue)\n地址: \(api)\n异常: \(data["msg"].stringValue))\n—————————————————————\n")
                     SVProgressHUD.dismiss()
-                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: fullUrl!)
+                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: requestPoolKey)
                     //                    HFAppEngine.shared.loginDidFailure(msg: data["msg"].stringValue)
                     return
                 }else if code == 30003 || code == 30004 {
                     print("———————— Token过期 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n请求方式: \(method.rawValue)\n地址: \(api)\n状态: \(resp.result.isSuccess)\n状态码:\(statusCode!)\n异常: \(data["info"].stringValue)\n数据: \(data)\n—————————————————————\n")
-                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: fullUrl!)
+                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: requestPoolKey)
                     self.requestRefreshToken(complete: { (isSucceed, msg) in
                         switch isSucceed {
                         case true:
                             
-                            HFNetworkManager.request(url: url, needBaseURL: needBaseURL, method: method, parameters: parameters, description: description, complete: complete)
+                            HFNetworkManager.request(url: url, needDefaultBaseURL: needDefaultBaseURL, method: method, parameters: parameters, description: description, complete: complete)
                             
                             break
                         case false:
@@ -129,7 +145,7 @@ class HFNetworkManager: NSObject {
                 }else {
                     
                     print("———————— 收到响应 ————————\n请求名称: \(description)\n请求编号: \(requestNumber)\n请求方式: \(method.rawValue)\n地址: \(api)\n状态: \(resp.result.isSuccess)\n状态码:\(statusCode!)\n异常: \(data["info"].stringValue)\n数据: \(data)\n—————————————————————\n")
-                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: fullUrl!)
+                    HFAppEngine.shared.networkManager.requestPool.removeValue(forKey: requestPoolKey)
                     complete(nil,instance)
                     return
                 }
