@@ -22,7 +22,7 @@ class HFDataCent: NSObject {
         
         for image: UIImage in images {
             
-            let imageData = UIImageJPEGRepresentation(image, 0.8)
+            let imageData = image.jpegData(compressionQuality: 0.8)
             let encodedImageStr = imageData!.base64EncodedString(options: .lineLength64Characters)
             let param:[String:Any] = ["img":encodedImageStr]
             group.enter()
@@ -78,7 +78,7 @@ class HFDataCent: NSObject {
     internal func uploadImages(image:UIImage,complete:@escaping ((_ isSucceed: Bool,_ msg: String, _ data: String?) -> Void)) {
         
         
-            let imageData = UIImageJPEGRepresentation(image, 0.8)
+            let imageData = image.jpegData(compressionQuality: 0.8)
             let encodedImageStr = imageData!.base64EncodedString(options: .lineLength64Characters)
             let param:[String:Any] = ["img":encodedImageStr]
 

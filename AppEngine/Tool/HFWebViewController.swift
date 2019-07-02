@@ -81,19 +81,19 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
     private lazy var leftBtn: UIBarButtonItem = {
         
         let obj = UIBarButtonItem()
-        let btn = UIButton(type: UIButtonType.custom)
+        let btn = UIButton(type: UIButton.ButtonType.custom)
 //        let image = UIImage(named:"ico_back").scaleImage(0.25)
         let image = UIImage(named:"ico_back")
-        image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+        image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         btn.imageView?.tintColor = self.view.tintColor
-        btn.setImage(image, for: UIControlState())
-        btn.setTitle(" 返回", for: UIControlState())
-        btn.addTarget(self, action: #selector(HFWebViewController.leftBtnBackCall), for: UIControlEvents.touchUpInside)
+        btn.setImage(image, for: UIControl.State())
+        btn.setTitle(" 返回", for: UIControl.State())
+        btn.addTarget(self, action: #selector(HFWebViewController.leftBtnBackCall), for: UIControl.Event.touchUpInside)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: self.textFontSize)
         btn.setTitleColor(self.titleColor, for: .normal)
         //        btn.sizeToFit()
-        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        btn.contentEdgeInsets = UIEdgeInsetsMake(0, -5, 0, 0)
+        btn.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+        btn.contentEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 0)
         //        btn.tintColor = self.view.tintColor
         btn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         obj.customView = btn
@@ -257,7 +257,7 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
             
             if progress.floatValue >= 1.0 {
                 self.progressView.setProgress(progress.floatValue, animated: true)
-                UIView.animate(withDuration: 0.3, delay: 0.3, options: UIViewAnimationOptions(), animations: {
+                UIView.animate(withDuration: 0.3, delay: 0.3, options: UIView.AnimationOptions(), animations: {
                     self.progressView.alpha = 0.0
                 }, completion: { (_) in
                     self.progressView.setProgress(0.0, animated: false)
@@ -277,10 +277,10 @@ open class HFWebViewController: UIViewController , UINavigationBarDelegate, UIGe
         
         
         self.navigationItem.leftBarButtonItem = leftBtn
-        let btn = UIButton(type: UIButtonType.custom)
+        let btn = UIButton(type: UIButton.ButtonType.custom)
         btn.imageView?.tintColor = self.view.tintColor
-        btn.setTitle("关闭", for: UIControlState())
-        btn.addTarget(self, action: #selector(HFWebViewController.escBtnBackCall), for: UIControlEvents.touchUpInside)
+        btn.setTitle("关闭", for: UIControl.State())
+        btn.addTarget(self, action: #selector(HFWebViewController.escBtnBackCall), for: UIControl.Event.touchUpInside)
         btn.titleLabel?.font = UIFont.systemFont(ofSize: self.textFontSize)
         btn.setTitleColor(self.titleColor, for: .normal)
         btn.center.y = (leftBtn.customView?.center.y)!

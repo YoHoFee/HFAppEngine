@@ -43,10 +43,10 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     private var startViewController: HFStartViewController?
     
     /// 主数据中心
-    @objc open let mainDataCent: HFMainDataCent = HFMainDataCent()
+    @objc public let mainDataCent: HFMainDataCent = HFMainDataCent()
     
     /// 网络管理类
-    @objc open let networkManager: HFNetworkManager = HFNetworkManager()
+    @objc public let networkManager: HFNetworkManager = HFNetworkManager()
     
     /// 当前显示的控制器
     open var currentDisplayViewController: UIViewController? {
@@ -221,7 +221,8 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
         group.enter()
         
-        var runTime = 10
+        // 演示模式持续时间
+        var runTime = 5
         
         if self.configuration.isEnabledDemonstration == true {
             let label = UILabel()
@@ -353,7 +354,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     
         if window.rootViewController != nil {
             
-            UIView.transition(from: window.rootViewController!.view, to: toViewVC.view, duration: 0.5, options: UIViewAnimationOptions.transitionCrossDissolve, completion: { (finished) in
+            UIView.transition(from: window.rootViewController!.view, to: toViewVC.view, duration: 0.5, options: UIView.AnimationOptions.transitionCrossDissolve, completion: { (finished) in
                 window.rootViewController = toViewVC
             })
             

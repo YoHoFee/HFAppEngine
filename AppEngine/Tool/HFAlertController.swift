@@ -181,11 +181,11 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     ///   - preferredStyle: 提示框类型
     ///   - ConfirmCallBack: 确定按钮回调
     /// - Returns: 一个默认的提示框
-    open class func alertController(title: String, message: String, preferredStyle: UIAlertControllerStyle = .alert, ConfirmCallBack:(() -> Void)?) -> HFAlertController {
+    open class func alertController(title: String, message: String, preferredStyle: UIAlertController.Style = .alert, ConfirmCallBack:(() -> Void)?) -> HFAlertController {
         
         let alertController = HFAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
-        let yesAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (_) in
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default) { (_) in
             if ConfirmCallBack != nil {
                 ConfirmCallBack!()
             }
@@ -206,9 +206,9 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     /// - Returns: return value description
     open class func alertController(title: String, message: String, yesBtnTitle: String, ConfirmCallBack:(() -> Void)?) -> HFAlertController {
         
-        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
-        let yesAction = UIAlertAction(title: yesBtnTitle, style: UIAlertActionStyle.default) { (_) in
+        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil)
+        let yesAction = UIAlertAction(title: yesBtnTitle, style: UIAlertAction.Style.default) { (_) in
             if ConfirmCallBack != nil {
                 ConfirmCallBack!()
             }
@@ -228,8 +228,8 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     /// - Returns: return value description
     open class func alertControllerByOnlyConfirm(title: String, message: String, ConfirmCallBack:(() -> Void)?) -> HFAlertController {
         
-        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let yesAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (_) in
+        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let yesAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default) { (_) in
             if ConfirmCallBack != nil {
                 ConfirmCallBack!()
             }
@@ -250,7 +250,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     /// - Returns: return value description
     open class func alertControllerWithAccount(title: String, message: String, ConfirmCallBack:((_ account: String, _ password: String) -> Void)?) -> HFAlertController {
         
-        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
 
         alertController.addTextField { (textField) in
             textField.placeholder = "请输入账号"
@@ -268,7 +268,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
             textField.returnKeyType = .done
         }
 
-        let yesAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (action) in
+        let yesAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default) { (action) in
 
             let accountTextField: UITextField = alertController.textFields![0]
             let passwordTextField: UITextField = alertController.textFields![1]
@@ -292,7 +292,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
     /// - Returns:
     open class func alertControllerWithTextFields(title: String, message: String,textFields: [UITextField], ConfirmCallBack:((_ textFields: [UITextField]) -> Void)?) -> HFAlertController {
         
-        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = HFAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         
         for item: UITextField in textFields {
             alertController.addTextField(configurationHandler: { (textField: UITextField) in
@@ -334,7 +334,7 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
             })
             
         }
-        let yesAction = UIAlertAction(title: "确定", style: UIAlertActionStyle.default) { (action) in
+        let yesAction = UIAlertAction(title: "确定", style: UIAlertAction.Style.default) { (action) in
             ConfirmCallBack?(alertController.textFields!)
         }
         alertController.addAction(yesAction)
@@ -431,8 +431,8 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
         case .System:
             values = [NSValue(caTransform3D: CATransform3DMakeScale(1.2, 1.2, 1.0)),
                       NSValue(caTransform3D: CATransform3DMakeScale(1.0, 1.0, 1.0))]
-            timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear),
-                               CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)]
+            timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear),
+                               CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)]
             popAnimation.duration        = 0.4
             popAnimation.values          = values
             popAnimation.keyTimes        = [0.0,0.5,0.75,1.0]
@@ -444,9 +444,9 @@ class HFAlertController: UIAlertController, HFAlertBkViewDelegate {
                       NSValue(caTransform3D: CATransform3DMakeScale(1.1, 1.1, 1.0)),
                       NSValue(caTransform3D: CATransform3DMakeScale(0.9, 0.9, 1.0)),
                       NSValue(caTransform3D: CATransform3DIdentity)]
-            timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                               CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut),
-                               CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+            timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                               CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+                               CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
             popAnimation.duration        = 0.4
             popAnimation.values          = values
             popAnimation.keyTimes        = [0.0,0.5,0.75,1.0]
@@ -565,7 +565,7 @@ fileprivate class HFAlertBkView: UIView {
         
         let bkButton: UIButton
         bkButton = UIButton(frame: UIScreen.main.bounds)
-        bkButton.addTarget(self, action: #selector(HFAlertBkView.fullBkButtonClickCallBack), for: UIControlEvents.touchUpInside)
+        bkButton.addTarget(self, action: #selector(HFAlertBkView.fullBkButtonClickCallBack), for: UIControl.Event.touchUpInside)
         self.fullBkButton = bkButton
         self.addSubview(self.fullBkButton!)
         

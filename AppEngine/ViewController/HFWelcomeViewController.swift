@@ -68,7 +68,7 @@ class HFWelcomeViewController: UICollectionViewController {
         
         let tintLabel = UILabel()
         let button = UIButton()
-        button.addTarget(self, action: #selector(self.buttonClickOnCallBack), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(self.buttonClickOnCallBack), for: UIControl.Event.touchUpInside)
         button.setTitle("点击进入", for: .normal)
         button.titleLabel?.textColor = UIColor.white
         tintLabel.text = "这是引导页，请向左滑动"
