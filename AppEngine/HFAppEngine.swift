@@ -64,7 +64,7 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         delegat.setupWindow()
         HFAppEngine.shared.run { (rootVC) in
             guard let window = UIApplication.shared.delegate?.window else { return }
-            HFAppEngine.shared.fadeOver(window: window!, toViewVC: rootVC)
+            HFAppEngine.shared.fadeOver(toViewVC: rootVC)
             window!.backgroundColor = UIColor.white
             window!.frame = UIScreen.main.bounds
             window!.makeKeyAndVisible()
@@ -348,20 +348,17 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
     /// 淡入淡出效果
     ///
     /// - Parameters:
-    ///   - window: window description
     ///   - toViewVC: toViewVC description
-    internal func fadeOver(window:UIWindow,toViewVC:UIViewController) {
+    internal func fadeOver(toViewVC:UIViewController) {
     
-        if window.rootViewController != nil {
-            
-            UIView.transition(from: window.rootViewController!.view, to: toViewVC.view, duration: 0.5, options: UIView.AnimationOptions.transitionCrossDissolve, completion: { (finished) in
-                window.rootViewController = toViewVC
-            })
-            
-        }else {
-            window.rootViewController = toViewVC;
-        }
-        
+        toViewVC.modalTransitionStyle = .crossDissolve
+        guard let window = UIApplication.shared.delegate?.window else { return }
+        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            let oldState = UIView.areAnimationsEnabled
+            UIView.setAnimationsEnabled(false)
+            window!.rootViewController = toViewVC;
+            UIView.setAnimationsEnabled(oldState)
+        }, completion: nil)
         
     }
     

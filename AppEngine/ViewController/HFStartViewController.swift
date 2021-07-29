@@ -18,59 +18,45 @@ class HFStartViewController: UIViewController {
         self.imageView.image = UIImage(named: self.splashImage())
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("【AppEngine】：伪启动页加载完毕")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("【AppEngine】：伪启动页已退出")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    //播放启动画面动画
-//    private func launchAnimation() {
-//        let statusBarOrientation = UIApplication.shared.statusBarOrientation
-//        if let img = splashImageForOrientation(orientation: statusBarOrientation,
-//                                               size: self.view.bounds.size) {
-//            //获取启动图片
-//            let launchImage = UIImage(named: img)
-//            let launchview = UIImageView(frame: UIScreen.main.bounds)
-//            launchview.image = launchImage
-//            //将图片添加到视图上
-////            self.view.addSubview(launchview)
-//            let delegate = UIApplication.shared.delegate
-//            let mainWindow = delegate?.window
-//            mainWindow!!.addSubview(launchview)
-//            
-//            //播放动画效果，完毕后将其移除
-//            UIView.animate(withDuration: 1, delay: 1.5, options: .beginFromCurrentState,
-//                                       animations: {
-//                                        launchview.alpha = 0.0
-//                                        launchview.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.5, 1.5, 1.0)
-//            }) { (finished) in
-//                launchview.removeFromSuperview()
-//            }
-//        }
-//    }
-    
 
     //获取启动图片名（根据设备方向和尺寸）
     func splashImage() -> String{
         
         var launchImageName = ""
-        let screenHeight = UIScreen.main.bounds.size.height
-
+        var viewOrientation: String
+        let viewSize = UIScreen.main.bounds.size
+        let orientation = UIApplication.shared.statusBarOrientation
+        
+        if orientation == .landscapeLeft || orientation == .landscapeRight {
+            viewOrientation = "Landscape"
+        }else {
+            viewOrientation = "Portrait"
+        }
+  
+        guard let imagesInfoArray = Bundle.main.infoDictionary?["UILaunchImages"] else { return "" }
+        
+        for dict: Dictionary<String, String> in imagesInfoArray as! Array {
             
-        switch screenHeight {
-        case 480:
-            launchImageName = "LaunchImage-700"
-        case 568:
-            launchImageName = "LaunchImage-700-568h"
-        case 667:
-            launchImageName = "LaunchImage-800-667h"
-        case 736:
-            launchImageName = "LaunchImage-800-Landscape-736h"
-        case 480:
-            launchImageName = "LaunchImage-700"
-        default:
-            launchImageName = "LaunchImage-800-667h"
+            let imageSize = NSCoder.cgSize(for: dict["UILaunchImageSize"]!)
+            if imageSize.equalTo(viewSize) && viewOrientation == dict["UILaunchImageOrientation"] {
+                launchImageName = dict["UILaunchImageName"]!
+            }
+            
         }
         
         return launchImageName
