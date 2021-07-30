@@ -387,6 +387,76 @@ class HFAppEngine: NSObject, UITabBarControllerDelegate {
         
     }
     
+    /// 判断手机是否是刘海屏
+    /// - Returns: -
+    func isFullScreenDisplay() -> Bool {
+        guard #available(iOS 11.0, *) else {
+            return false
+        }
+
+        let isFullScreenDisplay = UIApplication.shared.windows.last!.safeAreaInsets.bottom > 0
+        
+        return isFullScreenDisplay
+    }
+
+    
+    // MARK: - 常驻定时器模块
+    
+    
+    private var residentTimer: Timer?
+    private var totalTime: Int = 0
+    private var residentTimerTasks: [String:(() -> Void)?] = [:]
+    private var tasksTimeIntervals: [String:Int?] = [:]
+    
+    @objc func addResidentTimerTask(identifier: String, execute:(() -> Void)?) {
+        self.addResidentTimerTask(identifier: identifier, timeInterval: 1, execute: execute)
+    }
+    @objc func addResidentTimerTask(identifier: String, timeInterval: Double, execute:(() -> Void)?) {
+        if execute == nil { return }
+        self.residentTimerTasks[identifier] = execute
+        self.tasksTimeIntervals[identifier] = Int((timeInterval < 0.1 ? 0.1 : timeInterval) * 10)
+        self.runResidentTimer(timeInterval: 0.1)
+    }
+    @objc internal func closeResidentTimerTask(identifier: String) {
+        self.residentTimerTasks.removeValue(forKey: identifier)
+    }
+    @objc internal func cleanAllResidentTimerTask() {
+        self.residentTimerTasks = [:]
+    }
+    /// 手动停止并销毁验证码定时器
+    @objc internal func stopResidentTimer() {
+        self.residentTimer?.invalidate()
+        self.residentTimer = nil
+    }
+    
+    private func runResidentTimer(timeInterval: TimeInterval) {
+        if self.residentTimer != nil { return }
+        DispatchQueue.global(qos: .default).async {
+            self.residentTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(self.residentCallBack), userInfo: nil, repeats: true)
+            
+            RunLoop.current.run()
+        }
+        
+
+    }
+
+    /// 定时器回调
+    @objc private func residentCallBack() {
+        self.totalTime += 1
+        if self.residentTimerTasks.values.count == 0 {
+            self.stopResidentTimer()
+        }
+        for (key,task) in self.residentTimerTasks {
+            guard let timeInterval = self.tasksTimeIntervals[key] else { continue }
+            DispatchQueue.main.async(execute: {
+                if self.totalTime % timeInterval! == 0 {
+                  task?()
+                }
+            })
+        }
+    }
+
+    
 
     // MARK: 验证码定时器模块
     
